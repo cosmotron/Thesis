@@ -1,0 +1,107 @@
+\documentclass[letterpaper,12pt]{report}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{pdfpages}
+\usepackage[titletoc]{appendix}
+
+\title{CLARKSON UNIVERSITY \\
+\ \\
+Thesis Title \\ 
+\ \\
+\large{A Thesis By \\
+\textbf{Ryan J. Lewis} \\
+Department of Computer Science \\
+}}
+\author{Advisor \\
+Dr. 	Christopher Lynch \\
+Chair, Computer Science \& Mathematics \\
+\ \\ \\
+Submitted in partial fulfillment of the requirements \\
+for the degree of \\
+Master of Science \\
+Computer Science}
+\date{December XX, 2011 \\
+\ \\
+Accepted by the Graduate School \\
+\vspace{.5in}
+\hrulefill \\
+Date \hspace{2in} Dean
+}
+
+
+\begin{document}
+
+\maketitle
+
+% Begin signing page
+\newpage
+\thispagestyle{empty}
+\begin{center}
+The undersigned have examined the thesis entitled
+
+\vspace{0.4in}
+
+\textbf{Thesis Title}
+
+\vspace{0.4in}
+
+presented by Ryan Lewis,
+
+\vspace{0.4in}
+
+a candidate for the degree of \textsc{Master of Science},
+
+\vspace{0.4in}
+
+and hereby certify it is worthy of acceptance.
+
+\vspace{0.5in}
+\hrulefill \\
+
+Date \\
+\vspace{0.5in}
+\hrulefill \\
+\hfill Dr. Christopher Lynch, Advisor
+
+\vspace{0.5in}
+\hrulefill \\
+\hfill Dr. Kathleen Fowler
+
+\vspace{0.5in}
+\hrulefill \\
+\hfill Dr. David Wick
+\end{center}
+% End signing page
+
+\begin{abstract}
+Lorem ipsum dolor sit amet...
+\end{abstract}
+
+\cleardoublepage
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+
+% Begin chapters
+\include{introduction/introduction}
+%\include{chapter2/chapter2}
+% End chapters
+
+%\singlespacing
+
+%\raggedright
+%\bibliography{references}
+%\bibliographystyle{plain}
+
+%\doublespacing
+
+\begin{appendices}
+\include{appendix/user_manual}
+\end{appendices}
+
+\end{document}

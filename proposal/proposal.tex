@@ -1,0 +1,106 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[top=1.2in,right=1.2in,bottom=1.2in,left=1.2in]{geometry}
+\usepackage{setspace}
+\usepackage{paralist}
+\usepackage{url}
+
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+
+\title{Proposal for:\\Development of a Web-based Collaborative Environment for an Educational Outreach Program in Northern New York}
+\author{Ryan Lewis}
+\date{September 26, 2011}
+
+\begin{document}
+\maketitle
+
+%\doublespacing
+
+\section{Motivation}
+
+\begin{doublespacing}
+
+The New York State Education Department's (NYSED) Science and Technology Entry Program (STEP) outlined a set of priorities that it wanted to see solutions proposed for when determining which institutions it would award funding to. Paraphrased, these priorities are for institutions to provide programs and services to
+\begin{inparaenum}[\itshape a\upshape)]
+\item improve the recruitment and retention of male participants;
+\item improve the recruitment and retention of Hispanic/Latino and American Indian participants; and
+\item improve eighth grade students' NYS Math and Science Assessment examination scores \cite{nys-step-op-manual}.
+\end{inparaenum}
+
+In addition to this set of priorities, NYSED STEP also created a set of service and data requirements that STEP award recipients must provide. The underlying themes in the these requirements are that there should be increased collaboration between the awarded institution, the local educators, students, and parents as well as providing students with assistance in gaining skills needed to succeed in learning and pursuing STEM, or Science Technology Engineering Mathematics, fields \cite{nys-step-op-manual}.
+
+IMPETUS (Integrated Mathematics and Physics for Entry To Undergraduate STEM), for Career Success is the result of collaboration between St.Lawrence-Lewis Count BOCES, the STEM Partnership, and Clarkson University. Its primary goal is to improve and increase opportunities for underrepresented minorities and students from economically disadvantaged rural areas to realize their potential for college entry as STEM majors and for eventual career success in technically oriented professions.
+
+Traditionally, this collaboration has been accomplished via in-person meetings between various combinations of the relevant parties. St. Lawrence County is the largest county in the state based on area, but has a population density of only $41/\mathrm{mi.}^2$, whereas the state average is $355/\mathrm{mi.}^2$. Combined, these circumstances do not create an environment suited towards an efficient and effective exchange of information \cite{nny-prism}.
+
+IMPETUS has proposed the creation of a Web-based Collaborative Environment that will satisfy the STEP criteria by combining different technologies into a unified solution while increasing the convenience and accessibility of collaboration. Students who are in need of assistance, when meeting in-person is not possible, will be able to engage in web-based cooperative learning with Clarkson University students. Educators will be able to survey and receive feedback from targets regardless of their location and parents will have access to their children's data.
+
+In 2008, the National Science Foundation (NSF) created a Cyberlearning Task Force that was charged with, amongst other topics, determining what the key research topics were surrounding cyberlearning \cite{nsf-taskforce}. In a subsequent NSF publication, it was determined that one of these topics should be collecting, analyzing, and managing data about how individuals use a given cyberlearning system \cite{nsf-cyberlearning}.
+
+Due to NYSED STEP's data logging requirement and the fact that the NSF has deemed cyberlearning data collection to be an area of research interest, the IMPETUS Web-based Collaborative Environment will collect an extensive amount of data about not only the individuals using it, but also how they are using it.
+
+\end{doublespacing}
+
+\section{Research Objectives}
+
+\begin{doublespacing}
+
+The primary research objectives for the web-based environment are that it will:
+\begin{inparaenum}[\itshape 1\upshape)]
+\item be designed to increase collaboration; and
+\item gather data about both its users and how they use it.
+\end{inparaenum}
+
+\end{doublespacing}
+
+\subsection{Collaborative Functionality}
+
+\begin{doublespacing}
+
+The IMPETUS Web-based Collaborative Environment must have a core set of features to be considered functional. At the very base of this application, there has to be the idea of users, each of which have a set of permissions. These permissions are essential because not all users should have equal access.
+
+On top of this user model will sit several essential modules, namely: 
+\begin{inparaenum}[\itshape 1\upshape)]
+\item a module that will allow for the creation and distribution of quizzes/assessments by educators to students;
+\item a survey module that is flexible enough to collect data from any set of users;
+\item a module to allow educators and their students to connect to and share information with each other;
+\item a module that can generate a visualization of a course's curriculum; and
+\item a data viewer to provide access to the information being collected.
+\end{inparaenum}
+
+\end{doublespacing}
+
+\subsection{Data Collection}
+
+\begin{doublespacing}
+
+This application will be collecting a wide variety of data about its users, from basic, such as how frequently a user logs in, to complex, such as a class' proficiency on a subset of given assessments. Usage metrics will also be logged, such as how much time is spent on any given page.
+
+The user data will be helpful in gauging the success of this cyberlearning software, whereas the usage metrics will be important in making sure the system is usable and not getting in the way of it being successful. For example, if a user is having trouble taking a quiz because they're becoming frustrated with how the software is functioning, then any gauge of the system's usefulness has been trumped by bad design.
+
+\end{doublespacing}
+
+\section{Methodology}
+
+\begin{doublespacing}
+
+Creating the IMPETUS Tutoring and Mentoring Network application will be done following a modified waterfall model of software engineering: Requirements, Design, Implementation, and Verification; the modification being that feedback will be readily incorporated into the phases allowing progress to go ``up" the waterfall. Being that there is only one developer on the the project, it is the most basic model to follow.
+
+As modules becomes ready for Verification, usability tests will be done to get feedback on their usefulness and design. This will require the creation of surveys and the use of a usability lab to monitor a series of tasks that a user will perform with the application.
+
+\end{doublespacing}
+
+%\newpage
+\singlespacing
+\raggedright
+\bibliography{references}
+\bibliographystyle{plain}
+
+\end{document}
