@@ -3,6 +3,33 @@
 \usepackage{fullpage}
 \usepackage{pdfpages}
 \usepackage[titletoc]{appendix}
+\usepackage{titlesec}
+\usepackage{paralist}
+\usepackage{url}
+
+%% Adjust title spacing and borders.
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+{\normalfont\large\bfseries\singlespacing}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries\singlespacing}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries\singlespacing}{\thesubsubsection}{1em}{}
+
+\titlespacing*{\chapter}{0pt}{5pt}{25pt}
+\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
 
 \title{CLARKSON UNIVERSITY \\
 \ \\
@@ -87,18 +114,23 @@ Lorem ipsum dolor sit amet...
 
 \pagenumbering{arabic}
 
+\doublespacing
+
 % Begin chapters
-\include{introduction/introduction}
-%\include{chapter2/chapter2}
+\include{chapter_1/introduction}
+\include{chapter_2/software_requirements}
+\include{chapter_3/software_design}
+\include{chapter_4/usability}
+\include{chapter_5/conclusion}
 % End chapters
 
-%\singlespacing
+\singlespacing
 
-%\raggedright
-%\bibliography{references}
-%\bibliographystyle{plain}
+\raggedright
+\bibliography{bibliography/bibliography}
+\bibliographystyle{plain}
 
-%\doublespacing
+\doublespacing
 
 \begin{appendices}
 \include{appendix/user_manual}
