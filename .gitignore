@@ -4,4 +4,5 @@
 *.toc
 *.blg
 *.bbl
+*.texshop
 *.DS_Store

@@ -3,11 +3,33 @@
 
 \section{Overview}
 
-Lorem ipsum dolor sit amet.
+As established in section~\ref{sec:motivation}, the primary motivations behind the creation of IWCE  are the need for increased collaboration and the need for data logging. Since IWCE will be targeted at a variety of user class, it follows that each will be permitted access to a different set of features. This means that, while an increase in collaboration is an overall goal for all user classes, specific collaborative goals vary based on how much access each class has to IWCE:
 
-\subsection{Perspective}
+\begin{itemize}
+	\item All users should have read access to announcements and an event calendar.
+	\item All users should have access to an internal messaging system for one-to-one and one-to-many communication.
+	\item All users should be able to answer surveys that are available to them.
+	\item Students should be able to answer quizzes that are available to them.
+	\item Students should have access to an availability schedule for teaching assistants.
+	\item Students should have access to external educational resources.
+	\item Teaching assistants should be able to create their own availability schedule.
+	\item Teaching assistants should be able to create quizzes and surveys.
+	\item Teachers should be able to create announcements and events for the calendar.
+\end{itemize}
 
-Lorem ipsum dolor sit amet.
+The next set of goals correspond to data logging. There is the possibility of some conceptual overlap between whether a goal is collaborative or data logging related, so the line has been drawn at whether or not the collaborative aspect is simply incidental to having to log data. If that is the case, then the goal will categorized under data logging.
+
+\begin{itemize}
+\item Parents should have access to their children's data.
+\item Students should have access to their own data.
+\item Teaching assistants should have access to the students that they are assisting.
+\item Teachers should be able to be able to view reports for the students that are available to them.
+\item Teachers should be able to edit data for the students that are available to them.
+\item Administrators should be able to create and access the entities by which data is stored.
+\item Administrators should be able to access user tracking data.
+\end{itemize}
+
+In the above list, there are two terms which need some elaboration: ``data" and ``entities". ``Data" is defined as all personal information, survey results, and quiz results for the user it is in reference to, whereas ``entities" are the core objects that provide the basis for all relationships in the user data. These entities will be explained in chapter~\ref{chap:software_design}.
 
 \subsection{Features}
 
@@ -15,7 +37,7 @@ Lorem ipsum dolor sit amet.
 
 \subsection{User Classes}
 
-Lorem ipsum dolor sit amet.
+Anonymous, Parent, Student, Teaching Assistant, Teacher, Administrator. Explain hierarchy of roles.
 
 \subsection{Operating Environment}
 
@@ -58,3 +80,5 @@ Lorem ipsum dolor sit amet.
 \subsection{Security}
 
 \subsection{Usability}
+
+hello world
