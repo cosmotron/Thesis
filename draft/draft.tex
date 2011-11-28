@@ -78,11 +78,11 @@ When a Controller has to return a new response, it is common for the View to be 
 
 There are many benefits to using a template engine, such as:
 
-\begin{itemize}
-	\item Template inheritance: Defining a parent or a layout template that can be inherited from children allowing for a consistent theme across an application.
-	\item Syntax: Provides numerous shortcuts for applying common patterns to variables such as escaping output and modifying control flow.
-	\item Speed: After compiling a template, the result will be optimized and low-overhead PHP when compared to freehand coding.
-\end{itemize}
+\begin{description}
+	\item [Template inheritance] Defining a parent or a layout template that can be inherited from children allowing for a consistent theme across an application.
+	\item [Syntax] Provides numerous shortcuts for applying common patterns to variables such as escaping output and modifying control flow.
+	\item [Speed] After compiling a template, the result will be optimized and low-overhead PHP when compared to freehand coding.
+\end{description}
 
 %%% OVERVIEW
 \section*{Overview}
@@ -113,15 +113,34 @@ The next set of goals correspond to data logging. There is the possibility of so
 \item Administrators should be able to access user tracking data.
 \end{itemize}
 
-In the above list, there are two terms which require definition: \emph{data} and \emph{entities}. \emph{Data} is defined as all personal information, survey results, and quiz results for the user it is in reference to, whereas \emph{entities} are the core objects that provide the basis for all relationships in the user data.
+In the above list, there are two terms which require definition: \emph{data} and \emph{entities}. \emph{Data} is defined as all personal information, survey results, and quiz results for the user it is in reference to, whereas \emph{entities} are the fundamental objects that provide the basis for all relationships in the user data.
 
 \subsection*{Features}
 
-
+\begin{itemize}
+	\item Academic year switching
+	\item Quiz creator and result viewer
+	\item Survey creator and result viewer
+	\item Messaging system
+	\item Analytics
+	\item District editor
+	\item User editor
+\end{itemize}
 
 \subsection*{User Classes}
 
+In the Collaborative Environment, there exists a hierarchy of roles where each user will be a member of a particular level. These roles naturally correspond to the type of user that they describe and are listed in order of least access to most (also note that any level's access to features is a proper superset of its preceding level's features):
 
+\begin{description}
+	\item [Anonymous] \hfill \\ An anonymous user is any user that has not presented any authentication credentials. They have read access to announcements, calendars, and schedules.
+	\item [Parent] \hfill \\ Has access only to their student's educational data, quiz results, and attendance. They are able to participate in surveys and send messages to any user.
+	\item [Student] \hfill \\ May participate in quizzes and view their own various attempts at quizzes.
+	\item [Teaching Assistant] \hfill \\ For any district that they are enrolled as an assistant for, they may view any Student's data. They may also create surveys and quizzes.
+	\item [Teacher] \hfill \\ May read and write student data for only those that belong to the same district as themselves. This data includes survey results, quiz results, and detailed student educational information. A Teacher may also enroll a new Teaching Assistant into their district and  create new Students and Parents.
+	\item [Administrator] \hfill \\ Responsible for creating the fundamental Entities which all other users interact with and have access to all user data and reports. They may create new academic years and districts, as well as the specific student activities, courses, and exams that may be tracked. They may also create a user of any role and assign Teachers to their respective districts.
+
+
+\end{description}
 
 
 
