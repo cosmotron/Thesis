@@ -51,84 +51,146 @@ As stated in sections \ref{sec:overview-goals} and \ref{sec:overview-features}, 
 
 \section{Features}
 \label{sec:features}
+We now describe the main features of the Collaborative Environment as previously outlined in Section \ref{sec:overview-features}. Each subsection henceforth provides the concept, design, and implementation of an individual feature. They have been arranged in such a way that each successive feature will build on the previously introduced ones.
 
 %%%% Academic
 \subsection{Academic Year}
-In a traditional document-based teaching environment, student data is stored in numerous grade books  or spreadsheets which are held by many different people in many different places. Each teacher, for instance, would have their own set of student records and a district will have a permanent record for each student containing information such as their standardized test scores.
+\label{subsec:design-year}
+In a traditional document-based teaching environment, student data is stored in numerous grade books  or spreadsheets which are held by many different people in many different places. Each teacher, for instance, would have their own set of student records and a district will have a permanent record for each student containing information such as their standardized test scores. If an administrator managed to collect all of this data into a single place, however frustrating that may be, the next thing they would have to do to it, before any type of analysis, would be to group it all by what year the record corresponds to.
 
-As the Collaborative Environment 
+As the Collaborative Environment will be collecting data year after year, an Academic Year entity is required. Teachers, Teaching Assistants, and Students all have data associated with them that can change on an annual basis. Students will be taking different classes, have taken different standardized tests, and participated in different activities as well as be in a different grade altogether or have graduated. Each year can also bring with it a different round of quizzes and surveys and even new Teachers or Teaching Assistants.
 
 
-\subsubsection{Backend Design}
+\subsubsection{Design}
+The Year entity is really very simple, just a primary key identifier, \emph{id}, and the year itself as an integer, \emph{year}. Explicitly storing the years that the Collaborative Environment will be tracking in a table allows consistency throughout the entire application and customization by an administrator. An alternative implicit design would have been to keep a \emph{date} column in each entity that was going to have time-sensitive content added to it and the server would be responsible for getting the current year from the operating system, but problems arise if the system's time and date are not correct. 
 
-\subsubsection{Frontend Design}
+\begin{figure}[h!]
+	\centering
+	\fbox {
+		\includegraphics[width=0.7\textwidth]{figures/er/year}
+	}
+	\caption{Year Enhanced Entity-Relationship (EER) Diagram}
+	\label{fig:er-year}
+\end{figure}
+
+We see in Figure \ref{fig:er-year}, that the year entity appropriately maintains a one-to-many relationship with each of the tables that reference it. In an EER diagram such as this, each box represents a table in a database and each row in a box corresponds to a column in that table. A connecting line indicates that a relationships exists between its connected tables. If we take the relationship between the year and survey tables as an example, the line, which is drawn using Crow's Foot notation, indicates that a survey can be given during one year and that a year can have many surveys given during it. This diagram additionally indicates that many quizzes (see Section \ref{subsec:design-quiz}) and many rosters (see Section \ref{subsec:design-district}) can also only be associated with only one year.
+
+The user's choice of which year they want to have as their current context for data viewing and manipulation will have to persist between each page of the Collaborative Environment. Having to constantly select what year to interact . Therefore, once a user initially visits the web site, a PHP session variable will be established that tracks the year they select which will then be used by subsequent SQL queries to retrieve the requested data.
 
 \subsubsection{Implementation}
+As established in the previous section, the selected year must be persisted from page-to-page as well as be accessible in such a way that it will not require a user to constantly have to interact with a selector.
+
+This was implemented by having a year selector list appear in the upper-right corner of each page in the Collaborate Environment, as shown in Figure \ref{fig:screens-year}. The list is populated by making an asynchronous HTTP GET request to the URL \texttt{/year} which will both provide all available academic years that have been configured and indicate which is the current year as selected by the user.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.6\textwidth]{figures/screens/year}
+	}
+	\caption{Year Selector Highlight}
+	\label{fig:screens-year}
+\end{figure}
+
+Upon choosing a year from the selection, if it differs from the currently selected year, then an HTTP POST request will be sent to \texttt{/year/change/\textit{selected-year}}. This will cause the year PHP session variable to be updated to \emph{selected-year}. If the server responds with a success message, then the current web page will be refreshed and any changes to the data that are dependent on the year will be reflected.
 
 %%%% Users
 \subsection{User Management}
+\label{subsec:design-user}
+A User entity is perhaps the most fundamental object in the Collaborative Environment.  Users of each class, as defined in Section \ref{sec:overview-user-classes}, with the exception of anonymous, will be required to have an account with this system, and that account is what the User entity represents. The set of users minus anonymous will be referred to as ``registered users''.
 
-\subsubsection{Concept}
+	This entity facilitates the fulfillment of the Collaborative Environment's goal of logging user data by allowing the storage of a student's personal data such as gender, ethnicity, if they've graduated, and what college they are attending, in addition to student educational data such as standardized test scores, courses enrolled in, and after-school activities.
 
-\subsubsection{Backend Design}
+The collaborative functionality of the system also requires a User entity. Quiz attempts, survey submissions, and messaging need a way of differentiating one user from another.
 
-\subsubsection{Frontend Design}
+\subsubsection{Design}
+The Collaborative Environment internally refers to the set of user classes as ``roles''. Roles are easily stored in the database by using a role table such that its \emph{name} is stored in a column. The User entity, as modeled in Figure \ref{fig:er-user} stores two types of data: required information that applies to all registered users and personal/educational data that applies strictly to students. Required information consists of a user's \emph{username}, \emph{password}, \emph{salt}, \emph{firstName}, and \emph{lastName}.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/user}
+	}
+	\caption{User and Role EER Diagram}
+	\label{fig:er-user}
+\end{figure}
+
+Each of these attributes has an obvious use except, perhaps, for \emph{salt} which is a precautionary security measure. All user passwords are hashed using using the SHA-256 cryptographic hash function. This means that if two users had the same password, then they would obviously result in identical hashes. This fact can be used exploited by people that have large masses of precomputed hashes. A salt, which is a randomly generated string, is append to the plaintext of a password before it is hashed. Now, even if the user's password is something common, what is hashed is, most likely, something unique.
+
+For the sake of simplicity, we decided that the personal/education attributes \emph{birthday}, \emph{email}, \emph{ethnicity}, \emph{gender}, \emph{college}, \emph{major}, \emph{diploma}, and \emph{graduated} as year-independent data. This means that if and when these attributes have a value, that it will not vary based on what academic year the client has selected to be the current year; their values will persist through all years. On the other hand, there is strictly educational data that we do treat as year-dependent: activities, courses, exams, and grade level.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/user-student}
+	}
+	\caption{Student user EER Diagram}
+	\label{fig:er-user-student}
+\end{figure}
+
+Figure \ref{fig:er-user-student}, outlines the general model to achieve a year-dependent relationship between a student and their educational data and will be explained in depth in Section \ref{subsec:design-district}. Any given year is associated with many rosters, each of which contain a set of students in varying grade levels. Each student in a roster can then be associated with many exams, courses, and activities. 
 
 \subsubsection{Implementation}
+test
+
+\begin{figure}[h!]
+	\centering
+	\setlength\fboxsep{0pt}
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/user-list}
+	}
+	\caption{An privileged user's view of all the system's users.}
+	\label{fig:screens-user-lust}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\setlength\fboxsep{0pt}
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-profile}
+	}
+	\caption{A privileged user's view of a student's profile.}
+	\label{fig:screens-user-student-profile}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\setlength\fboxsep{0pt}
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-edit}
+	}
+	\caption{A privileged user editing a student's account.}
+	\label{fig:screens-user-student-edit}
+\end{figure}
+
+
 
 %%%% Districts
 \subsection{District Management}
-
-\subsubsection{Concept}
-
-\subsubsection{Backend Design}
-
-\subsubsection{Frontend Design}
-
-\subsubsection{Implementation}
+\label{subsec:design-district}
+test
 
 %%%% Quiz
 \subsection{Quiz System}
-
-\subsubsection{Concept}
-
-\subsubsection{Backend Design}
-
-\subsubsection{Frontend Design}
-
-\subsubsection{Implementation}
+\label{subsec:design-quiz}
+test
 
 %%%% Survey
 \subsection{Survey System}
-
-\subsubsection{Concept}
-
-\subsubsection{Backend Design}
-
-\subsubsection{Frontend Design}
-
-\subsubsection{Implementation}
+\label{subsec:design-survey}
+test
 
 %%%% Messaging
 \subsection{Messaging}
-
-\subsubsection{Concept}
-
-\subsubsection{Backend Design}
-
-\subsubsection{Frontend Design}
-
-\subsubsection{Implementation}
+\label{subsec:design-messaging}
+test
 
 %%%% Analytics
 \subsection{Analytics}
-
-\subsubsection{Concept}
-
-\subsubsection{Backend Design}
-
-\subsubsection{Frontend Design}
-
-\subsubsection{Implementation}
+\label{subsec:design-analytics}
+test
 
 \section{Known Issues}
