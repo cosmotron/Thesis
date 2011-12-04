@@ -47,11 +47,11 @@ There are many benefits to using a template engine, such as:
 \subsection{Khan Academy}
 The Khan Academy is a nonprofit organization that aims to better global education by providing free, high-quality resources to anyone anywhere. \cite{khan-website-about} On their website, they provide in excess of 2700 videos that teach varying topics in STEM fields. The organization has been provided with the financial support and public accolades of large entities such as The Bill \& Melinda Gates Foundation and Google \cite{khan-wiki-sources} indicating that they produce noteworthy content. The videos that Khan Academy hosts are all created by Salman Khan who holds an MBA from Harvard and three science degrees from MIT. Each is produced in a fairly consistent manner using a software whiteboard, a screen capture program, and a microphone while typically lasting about 10 minutes.
 
-As stated in sections \ref{sec:overview-goals} and \ref{sec:overview-features}, students using the Collaborative Environment should have access to supplemental learning resources and will have the ability to take quizzes given by their teachers and teaching assistants. The Khan Academy videos are ideal for this use as they are concise and short enough to be associated with individual quizzes that are created in the Collaborative Environment. If a student, while taking a quiz, feels that they are in need of some assistance, a link to the an appropriate Khan Academy video will be readily available to them.
+As stated in \S \ref{sec:overview-goals} and \S \ref{sec:overview-features}, students using the Collaborative Environment should have access to supplemental learning resources and will have the ability to take quizzes given by their teachers and teaching assistants. The Khan Academy videos are ideal for this use as they are concise and short enough to be associated with individual quizzes that are created in the Collaborative Environment. If a student, while taking a quiz, feels that they are in need of some assistance, a link to the an appropriate Khan Academy video will be readily available to them.
 
 \section{Features}
 \label{sec:features}
-We now describe the main features of the Collaborative Environment as previously outlined in Section \ref{sec:overview-features}. Each subsection henceforth provides the concept, design, and implementation of an individual feature. They have been arranged in such a way that each successive feature will build on the previously introduced ones.
+We now describe the main features of the Collaborative Environment as previously outlined in \S \ref{sec:overview-features}. Each subsection henceforth provides the concept, design, and implementation of an individual feature. They have been arranged in such a way that each successive feature will build on the previously introduced ones.
 
 %%%% Academic
 \subsection{Academic Year}
@@ -73,7 +73,7 @@ The Year entity is really very simple, just a primary key identifier, \emph{id},
 	\label{fig:er-year}
 \end{figure}
 
-We see in Figure \ref{fig:er-year}, that the year entity appropriately maintains a one-to-many relationship with each of the tables that reference it. In an EER diagram such as this, each box represents a table in a database and each row in a box corresponds to a column in that table. A connecting line indicates that a relationships exists between its connected tables. If we take the relationship between the year and survey tables as an example, the line, which is drawn using Crow's Foot notation, indicates that a survey can be given during one year and that a year can have many surveys given during it. This diagram additionally indicates that many quizzes (see Section \ref{subsec:design-quiz}) and many rosters (see Section \ref{subsec:design-district}) can also only be associated with only one year.
+We see in Figure \ref{fig:er-year}, that the year entity appropriately maintains a one-to-many relationship with each of the tables that reference it. In an EER diagram such as this, each box represents a table in a database and each row in a box corresponds to a column in that table. A connecting line indicates that a relationships exists between its connected tables. If we take the relationship between the year and survey tables as an example, the line, which is drawn using Crow's Foot notation, indicates that a survey can be given during one year and that a year can have many surveys given during it. This diagram additionally indicates that many quizzes (see \S \ref{subsec:design-quiz}) and many rosters (see \S \ref{subsec:design-district}) can also only be associated with only one year.
 
 The user's choice of which year they want to have as their current context for data viewing and manipulation will have to persist between each page of the Collaborative Environment. Having to constantly select what year to interact . Therefore, once a user initially visits the web site, a PHP session variable will be established that tracks the year they select which will then be used by subsequent SQL queries to retrieve the requested data.
 
@@ -96,7 +96,7 @@ Upon choosing a year from the selection, if it differs from the currently select
 %%%% Users
 \subsection{User Management}
 \label{subsec:design-user}
-A User entity is perhaps the most fundamental object in the Collaborative Environment.  Users of each class, as defined in Section \ref{sec:overview-user-classes}, with the exception of anonymous, will be required to have an account with this system, and that account is what the User entity represents. The set of users minus anonymous will be referred to as ``registered users''.
+A User entity is perhaps the most fundamental object in the Collaborative Environment.  Users of each class, as defined in \S \ref{sec:overview-user-classes}, with the exception of anonymous, will be required to have an account with this system, and that account is what the User entity represents. The set of users minus anonymous will be referred to as ``registered users''.
 
 	This entity facilitates the fulfillment of the Collaborative Environment's goal of logging user data by allowing the storage of a student's personal data such as gender, ethnicity, if they've graduated, and what college they are attending, in addition to student educational data such as standardized test scores, courses enrolled in, and after-school activities.
 
@@ -127,26 +127,43 @@ For the sake of simplicity, we decided that the personal/education attributes \e
 	\label{fig:er-user-student}
 \end{figure}
 
-Figure \ref{fig:er-user-student}, outlines the general model to achieve a year-dependent relationship between a student and their educational data and will be explained in depth in Section \ref{subsec:design-district}. Any given year is associated with many rosters, each of which contain a set of students in varying grade levels. Each student in a roster can then be associated with many exams, courses, and activities. 
+Figure \ref{fig:er-user-student}, outlines the general model to achieve a year-dependent relationship between a student and their educational data and will be explained in depth in \S \ref{subsec:design-district}. Any given year is associated with many rosters, each of which contain a set of students in varying grade levels. Each student in a roster can then be associated with many exams, courses, and activities. 
 
 \subsubsection{Implementation}
-test
+User management is broken up into three processes: creation, updating, and reading. As an interface to each of these processes, privileged users have access to a user management interface seen in Figure \ref{fig:screens-user-list}. This interface will only display the users that the currently authenticated user has access to. For administrators, this will be all users, whereas a teacher or a teaching assistant will only see the students that belong to the district that themselves belong to. For example, if a teacher is listed as being a teacher in the district ``Public School \#1'' for the year 2011, then the user list will only show students that also enrolled at the district during that year.
+
+This idea of teachers and teaching assistants only having access to the students that are on the same roster as them is persistent throughout the application. The details regarding districts, rosters, and permissions will be explained in \S \ref{subsec:design-district}.
+
+With this data now being tracked by the Collaborative Environment, trends and reports will be able to be generated. Tracking student participation in activities, courses, and exams is now possible for the set of all students or even subsets such as minorities, males, or females.
 
 \begin{figure}[h!]
 	\centering
-	\setlength\fboxsep{0pt}
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/user-list}
 	}
-	\caption{An privileged user's view of all the system's users.}
-	\label{fig:screens-user-lust}
+	\caption{A privileged user's view of all the system's users.}
+	\label{fig:screens-user-list}
 \end{figure}
 
-
+When a privileged user must add or edit a user, the interface appears as it does in Figure \ref{fig:screens-user-student-edit}, except all of the fields are simply blank in the case of adding a new user. The interface has has been split horizontally into two sections, the top is for personal/educational data whereas the bottom is for strictly educational data. In the top half, input fields has been grouped into sets of required and supplemental (optional). This allows the user to readily identify which fields they must have a value for and not have to wait for the program to return an error.
 
 \begin{figure}[h!]
 	\centering
-	\setlength\fboxsep{0pt}
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-edit}
+	}
+	\caption{A privileged user editing a student's account.}
+	\label{fig:screens-user-student-edit}
+\end{figure}
+
+The supplemental fields for \emph{ethnicity}, \emph{diploma}, and \emph{major}, provide the user with a limited selection of options rather than a freely fillable text input because this will allow for consistent data analysis. If users were able to enter whatever they wanted for these, it would become difficult to use that data to generate accurate reports. For example, if one person were to enter that a student was going to major in ``Mathematics'' and another were to enter ``Math''.
+
+Since the bottom half of the screen only applies to students, where strictly educational data is entered, it will only appear if the user is assigned the Student role. As stated in the Implementation section, \emph{activities}, \emph{courses}, and \emph{exams} are year-dependent. This means that if a user were to choose different academic years while editing a student's data, they would see these fields change appropriately. A student can be associated with as many year-dependent  fields as necessary by clicking the Add button for the appropriate section.
+
+Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fig:screens-user-student-profile}. This simply provides an view into the data stored for a user. Just as the add/edit screen would update its data when the current academic year is changed, so will the view screen.
+
+\begin{figure}[h!]
+	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-profile}
 	}
@@ -155,23 +172,42 @@ test
 \end{figure}
 
 
-
-\begin{figure}[h!]
-	\centering
-	\setlength\fboxsep{0pt}
-	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-edit}
-	}
-	\caption{A privileged user editing a student's account.}
-	\label{fig:screens-user-student-edit}
-\end{figure}
-
-
-
 %%%% Districts
 \subsection{District Management}
 \label{subsec:design-district}
 test
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/district.pdf}
+	}
+	\caption{District and Roster EER}
+	\label{fig:er-district}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/district-list}
+	}
+	\caption{A privileged user's view of all the system's users.}
+	\label{fig:screens-district-list}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/district-edit}
+	}
+	\caption{A privileged user editing a district.}
+	\label{fig:screens-district-list}
+\end{figure}
+
 
 %%%% Quiz
 \subsection{Quiz System}

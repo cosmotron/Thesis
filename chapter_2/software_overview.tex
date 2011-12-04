@@ -35,7 +35,7 @@ In the above list, there are two terms which require definition: \emph{data} and
 
 \section{Features}
 \label{sec:overview-features}
-High level overview of each. Details of each will follow in Section \ref{sec:features}.
+High level overview of each. Details of each will follow in \S \ref{sec:features}.
 
 \textit{expand:}
 
@@ -52,13 +52,19 @@ High level overview of each. Details of each will follow in Section \ref{sec:fea
 \section{User Classes}
 \label{sec:overview-user-classes}
 
-In the Collaborative Environment, there exists a hierarchy of roles where each user will be a member of a particular level. These roles naturally correspond to the type of user that they describe and are listed in order of least access to most (also note that any level's access to features is a proper superset of its preceding level's features):
+In the Collaborative Environment, there exists a hierarchy of roles where each user will be a member of a particular level. These roles naturally correspond to the type of user that they describe and are listed in order of least access to most (also note that any level's access to features is a proper superset of its preceding level's features). Further, there is a distinction between non-privileged and privileged classes: users of a non-privileged class have access to zero or one user's data (typically their own or their child's) whereas users of a privileged class have access to zero or more users data (typically all of their students).
 
 \begin{description}
-	\item [Anonymous] \hfill \\ An anonymous user is any user that has not presented any authentication credentials. They have read access to announcements, calendars, and schedules.
-	\item [Parent] \hfill \\ Has access only to their student's educational data, quiz results, and attendance. They are able to participate in surveys and send messages to any user.
-	\item [Student] \hfill \\ May participate in quizzes and view their own various attempts at quizzes.
-	\item [Teaching Assistant] \hfill \\ For any district that they are enrolled as an assistant for, they may view any Student's data. They may also create surveys and quizzes.
-	\item [Teacher] \hfill \\ May read and write student data for only those that belong to the same district as themselves. This data includes survey results, quiz results, and detailed student educational information. A Teacher may also enroll a new Teaching Assistant into their district and  create new Students and Parents.
-	\item [Administrator] \hfill \\ Responsible for creating the fundamental Entities which all other users interact with and have access to all user data and reports. They may create new academic years and districts, as well as the specific student activities, courses, and exams that may be tracked. They may also create a user of any role and assign Teachers to their respective districts.
+	\item [Non-privileged] \hfill
+		\begin{description}
+			\item [Anonymous] \hfill \\ An anonymous user is any user that has not presented any authentication credentials. They have read access to announcements, calendars, and schedules.
+			\item [Parent] \hfill \\ Has access only to their student's educational data, quiz results, and attendance. They are able to participate in surveys and send messages to any user.
+			\item [Student] \hfill \\ May participate in quizzes and view their own various attempts at quizzes.
+		\end{description}
+	\item [Privileged] \hfill
+		\begin{description}
+			\item [Teaching Assistant] \hfill \\ For any district that they are enrolled as an assistant for, they may view any Student's data. They may also create surveys and quizzes.
+			\item [Teacher] \hfill \\ May read and write student data for only those that belong to the same district as themselves. This data includes survey results, quiz results, and detailed student educational information. A Teacher may also enroll a new Teaching Assistant into their district and  create new Students and Parents.
+			\item [Administrator] \hfill \\ Responsible for creating the fundamental Entities which all other users interact with and have access to all user data and reports. They may create new academic years and districts, as well as the specific student activities, courses, and exams that may be tracked. They may also create a user of any role and assign Teachers to their respective districts.
+		\end{description}
 \end{description}
