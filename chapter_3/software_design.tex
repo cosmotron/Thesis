@@ -346,7 +346,11 @@ To facilitate communication between all of these users, a messaging system was d
 As a solution to this, the Collaborative Environment has a simple messaging system that allows for contacting any of the systems registered users. One may send a message to just an individual, a group of individuals, or even an entire class of users quickly. The system keeps track of messages internally, but is capable of notifying a user of a new message via email if they have an email address associated with their account.
 
 \subsubsection{Design}
-test
+The messaging system treats messages and their replies as a correspondence thread, that is, one message is a parent and then replies may be added after that parent. When a new message is created, a single instance of that message is stored in the message table (see Figure \ref{fig:er-message}). All of the designated recipients are then added to the recipient table, including the sender themselves. This means that even though a message will be sent to at least two people, there is only ever one instance of the message itself and all recipients are basically given viewing rights to that message via the recipients table. When a user has opened a message or deletes it, their entry in the recipients table for that message is simply modified.
+
+If a message is a reply to a parent, then its entry in the message table is marked as such and all the recipients of the parent message will then receive a copy of the reply.
+
+Having a message system built like this allows for an archive of messages and reduces message text duplication in the database.
 
 \begin{figure}[h!]
 	\centering
@@ -358,7 +362,7 @@ test
 \end{figure}
 
 \subsubsection{Implementation}
-test
+As stated previously, any registered user in the system has access to the messaging feature and, as such, can message any other user in the system. In Figure \ref{fig:screens-message-new}, a student is sending their teacher a message regarding a homework assignment. The ``To'' field allows for any number of recipients to be added to it via an autocompleting search feature. Recipients can also be classes of users such as ``Students'' as a quick way of addressing all the users in the system that have the student role. Upon sending the message, it will appear in both the sender's and the recipient's message lists (but in the case of the sender, it will be marked as read). Additionally, if the recipients have an email address associated with their account, a copy of the message will be sent to that address along with a link to view the message in the Collaborate Environment. The message list acts as a combination of an inbox and an outbox.
 
 \begin{figure}[h!]
 	\centering
@@ -369,6 +373,7 @@ test
 	\label{fig:screens-message-new}
 \end{figure}
 
+When the teacher that was marked as the recipient of the student's message checks their message list (Figure \ref{fig:screens-message-list}), they will see it at the top and highlighted as it is an unread message.
 
 \begin{figure}[h!]
 	\centering
@@ -376,9 +381,10 @@ test
 		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-list}
 	}
 	\caption{A teacher views their message list.}
-	\label{fig:screens-mesasge-list}
+	\label{fig:screens-message-list}
 \end{figure}
 
+Viewing a message will open the chain of messages with the parent at the top. In this case, since the student was the original sender, their message will appear at the top of the list and replies will be appended. The teacher responds the student's inquiry, as shown in Figure \ref{fig:screens-message-reply}, and an email will be sent to the student, if appropriate, notifying them of the response. If the teacher were to return to their message list, the thread of messages will now be marked as unread.
 
 \begin{figure}[h!]
 	\centering
