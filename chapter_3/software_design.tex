@@ -1,6 +1,6 @@
 \chapter{Software Design and Implementation}
 \label{chap:software-design}
-
+ 
 \section{Background}
 This section will provide details of the existing software and services that are leveraged to create the Collaborative Environment. For each, we provide the reasoning for its use as well as a technical description.
 
@@ -50,7 +50,7 @@ The Khan Academy is a nonprofit organization that aims to better global educatio
 As stated in \S \ref{sec:overview-goals} and \S \ref{sec:overview-features}, students using the Collaborative Environment should have access to supplemental learning resources and will have the ability to take quizzes given by their teachers and teaching assistants. The Khan Academy videos are ideal for this use as they are concise and short enough to be associated with individual quizzes that are created in the Collaborative Environment. If a student, while taking a quiz, feels that they are in need of some assistance, a link to the an appropriate Khan Academy video will be readily available to them.
 
 \section{Features}
-\label{sec:features}
+\label{sec:design-features}
 We now describe the main features of the Collaborative Environment as previously outlined in \S \ref{sec:overview-features}. Each subsection henceforth provides the concept, design, and implementation of an individual feature. They have been arranged in such a way that each successive feature will build on the previously introduced ones.
 
 %%%% Academic
@@ -85,7 +85,7 @@ This was implemented by having a year selector list appear in the upper-right co
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.6\textwidth]{figures/screens/year}
+		\includegraphics[width=0.6\textwidth]{figures/screens/year/year}
 	}
 	\caption{Year Selector Highlight}
 	\label{fig:screens-year}
@@ -139,7 +139,7 @@ With this data now being tracked by the Collaborative Environment, trends and re
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/user-list}
+		\includegraphics[width=0.8\textwidth]{figures/screens/user/user-list}
 	}
 	\caption{A privileged user's view of all the system's users.}
 	\label{fig:screens-user-list}
@@ -150,7 +150,7 @@ When a privileged user must add or edit a user, the interface appears as it does
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-edit}
+		\includegraphics[width=0.8\textwidth]{figures/screens/user/user-student-edit}
 	}
 	\caption{A privileged user editing a student's account.}
 	\label{fig:screens-user-student-edit}
@@ -165,7 +165,7 @@ Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fi
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/user-student-profile}
+		\includegraphics[width=0.8\textwidth]{figures/screens/user/user-student-profile}
 	}
 	\caption{A privileged user's view of a student's profile.}
 	\label{fig:screens-user-student-profile}
@@ -175,7 +175,12 @@ Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fi
 %%%% Districts
 \subsection{District Management}
 \label{subsec:design-district}
-test
+In order to more accurately group the Collaborative Environment's users together and to control access to private student data, a district entity is necessary. If a district was to only ever have the same users associated with it, then a district entity alone would be sufficient, but this is not true; a district's relationship with its teachers, teaching assistants, and students is year-dependent. To allow for this, we introduce the idea of a roster entity where a district can have many rosters such that each roster is associated with a single year.
+
+Using this grouping, it is now also possible to allow access to data based upon which roster a user belongs to. For instance, teachers could be given access to only the students in the roster that they themselves are apart of for a given year, thus they would not be allowed to see student performance in another district. Having a district associated with a student for any given also allows for a wider range of data analysis as it becomes possible to, for instance, compare student performance between districts.
+
+\subsubsection{Design}
+Using the concept of a roster, it becomes a join table (a table which links common attributes between two or more tables, in this case \emph{year\_id} and \emph{district\_id}) for the district's  many-to-many relationship with a year. In other words, a district will be associated with many years because it will have a different set of users each year. Likewise, a year will be associated with many districts because each academic year, the Collaborative Environment will be tracking multiple school districts.
 
 \begin{figure}[h!]
 	\centering
@@ -186,43 +191,203 @@ test
 	\label{fig:er-district}
 \end{figure}
 
+Figure \ref{fig:er-district} shows the many-to-many relationship between district and year via roster. In addition to being a join table, roster must be uniquely identifiable itself since it must be in a many-to-many relationship with the user table, therefore it has its own \emph{id}. To keep track of a district's three groups of users for a given year (teaches, teaching assistants, and students), its roster maintains three different relationships with the user table. If a user is a teacher and is to be in a district's roster for a given year, then they will be added to the roster\_teacher table. The same logic applies to assistants and students, except a student can additionally have a \emph{grade} associated with them (e.g. grade 9, grade 10).
 
+\subsubsection{Implementation}
+Privileged users have access to the a list of the districts, as show in Figure \ref{fig:screens-district-list}, which they are in the rosters of for the currently selected year where they can a. An exception to this is for administrators, which have access to all districts. From this list, privileged users can edit any district in the list and administrators have the additional ability to create a new district.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/district-list}
+		\includegraphics[width=0.8\textwidth]{figures/screens/district/district-list}
 	}
-	\caption{A privileged user's view of all the system's users.}
+	\caption{An administrator's view of all the system's districts.}
 	\label{fig:screens-district-list}
 \end{figure}
 
-
+When editing or adding a district, the user will use the interface displayed in Figure \ref{fig:screens-district-edit}. One is able to add users of different classes to the roster by searching for their name in the appropriate search boxes. In this initial implementation, there is a constraint such that teachers and students can only be in one district's roster for a given year. This was set because, in most cases, teachers and students generally do not need to be associated with multiple districts. Due to this limitation, users that are already in a different roster for the current year will not appear in the search results for a user.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
-		\includegraphics[width=0.8\textwidth]{figures/screens/district-edit}
+		\includegraphics[width=0.8\textwidth]{figures/screens/district/district-edit}
 	}
 	\caption{A privileged user editing a district.}
-	\label{fig:screens-district-list}
+	\label{fig:screens-district-edit}
 \end{figure}
 
+Each new academic year, a roster will need to be created that ties the districts to that new year. This can be a tiresome activity, especially if a district has a lot of users that need to be associated with it. To try to ease this process, there is an import feature which will simply look at the previous year's roster for the current district and copy it to the current year's roster. It will also automatically increment the student's grades by one; this is due to the assumption that a majority of students will advance to the next grade.
+
+\subsection{Learning Pathway}
+\label{subsec:design-pathway}
+test
+
+\subsubsection{Design}
+test
+
+\subsubsection{Implementation}
+test
 
 %%%% Quiz
 \subsection{Quiz System}
 \label{subsec:design-quiz}
-test
+A system by which teachers and teaching assistants can create assessments of their student's knowledge is one of the key collaborative goals of this system. By allowing teachers and teaching assistants to create quizzes quickly and easily, it will allow them to get valuable feedback from their students. From the student's perspective, they'll have access to a means of studying and brushing up on topics that they might feel they are struggling with. A quiz can be made about any topic, but when used in conjunction with the learning pathway, as described in \S \ref{subsec:design-pathway}, it creates a rich means of showing students the topics they need to know (based on state standards) while providing them with the resources to succeed.
+
+\subsubsection{Design}
+A quiz in the Collaborative Environment can be broken up into two sets of relationships: a quiz, its questions, and its questions answers and a student, their attempt at a quiz, and how they performed on each question during that attempt. Figure \ref{fig:er-quiz} shows that one quiz may have multiple questions and that a question may have multiple answers. This approach allows for two different types of questions to be used in a quiz: short answer and multiple choice. If a quiz question only has one answer, then it is a short answer, whereas if it has multiple answers then it is clearly a multiple choice question.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/quiz.pdf}
+	}
+	\caption{Quiz and Quiz Result EER}
+	\label{fig:er-quiz}
+\end{figure}
+
+To allow students the ability to learn from their mistakes, quizzes may have multiple attempts made at them to achieve a perfect score. This requires that a user have a many-to-many relationship with a quiz itself via an attempts join table. To be able to store exactly which questions a student got correct or incorrect along with their actual answer, every quiz attempt has a many-to-many relationship with a quiz's questions called result. The idea is that an individual attempt at a quiz is comprised of a series of results, or a result of answering each quiz question. Each result is able to store the exact answer that a student gave along with if it was correct.
+
+\subsubsection{Implementation}
+When a privileged user wants to create a quiz, they will be presented with the interface seen in Figure \ref{fig:screens-quiz-new}. First, the creator must choose a name for the quiz and may enter instructions for the student to follow. Next, the creator may add as many problems to the quiz as they must, each of which they may add one or more answers to.
+
+\begin{figure}[p!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-new}
+	}
+	\caption{A privileged user creating a quiz.}
+	\label{fig:screens-quiz-new}
+\end{figure}
+
+When adding the text for the question, the creator may opt to use the \LaTeX\ displayed math shorthand (i.e. \texttt{\textbackslash [ ...\textbackslash ]} ). Should they choose to, then their question will be rendered by a JavaScript library called MathJax that displays equations in \LaTeX\ markup in all web browsers. \cite{mathjax-webpage}. If they choose not to, then whatever is entered will simply appear as the question. An example of each can be seen in the questions in Figure \ref{fig:screens-quiz-new}.
+
+As stated in the design section, a question can have one or more answers associated with it. If it has only one answer, it makes it a short answer question allowing the student and freely type in an answer. The creator must include a ``text label'' for the answer which is what will appear before the text input when attempting the quiz (e.x. ``$x = $''). If the question has multiple answers (making it a multiple choice question), then this same text label becomes the visible text identifying one answer from another.
+
+Switching to the perspective of a logged in student, they would see the interface show in Figure \ref{fig:screens-quiz-list-student} which displays the available quizzes, some of which the student has attempted and one of which that they have not.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-list-student}
+	}
+	\caption{A student's list of available quizzes.}
+	\label{fig:screens-quiz-list-student}
+\end{figure}
+
+If the student were to attempt the ``Linear Equations 2'' quiz, they would then they would be presented with what is shown in Figure \ref{fig:screens-quiz-new-attempt}; a rendered version of what was being constructed in Figure \ref{fig:screens-quiz-new}. One can see that ``Problem 1'' has a styling that looks identical to what one would expect to see in \LaTeX\ rendered document as well as a plaintext question in ``Problem 2''. ``Problem 1'' is a demonstration of a short answer question and allows the user to freely type in an answer whereas ``Problem 2'' is clearly a multiple choice question.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-new-attempt}
+	}
+	\caption{A student attempts a new quiz.}
+	\label{fig:screens-quiz-new-attempt}
+\end{figure}
+
+When a student enters their answers for the quiz, the system will simply compare their answers to answers that were set during quiz creation. This implementation can only exactly compare a student's input to the values that were given during a quiz's creation (e.g. it can not round or reduce answers). The results of submitting a quiz for grading can be seen in Figure \ref{fig:screens-quiz-attempt-results}.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-attempt-results}
+	}
+	\caption{A student receives the results of their quiz attempt.}
+	\label{fig:screens-quiz-attempt-results}
+\end{figure}
+
+As previously stated, students have the option of taking a quiz as many times as they see fit and the system will, in turn, keep track of those attempts. This allows for analyzing student performance on individual topics and for assessing the quality of quizzes. We see the list of attempts that was made on the ``Linear Equations 2'' quiz in Figure \ref{fig:screens-quiz-attempt-list}.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-attempt-list}
+	}
+	\caption{A student views all of their attempts at a quiz.}
+	\label{fig:screens-quiz-attempt-list}
+\end{figure}
+
+Once students start answering quizzes, teachers and teaching assistants are able to see their progress on them from the results interface show in Figure \ref{fig:screens-quiz-results-list}. The viewing policy on quiz results is that teachers and teaching assistants may only see the students that are in the same district roster as them for the currently selected year (see \S \ref{subsec:design-district} for details of the district and roster design).
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-results-list}
+	}
+	\caption{A teacher views the quiz results of the students in their district.}
+	\label{fig:screens-quiz-results-list}
+\end{figure}
 
 %%%% Survey
 \subsection{Survey System}
 \label{subsec:design-survey}
 test
 
+\subsubsection{Design}
+test
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/survey.pdf}
+	}
+	\caption{Survey and Survey Submission EER}
+	\label{fig:er-survey}
+\end{figure}
+
+\subsubsection{Implementation}
+test
+
 %%%% Messaging
 \subsection{Messaging}
 \label{subsec:design-messaging}
+To facilitate communication between all of these users, a messaging system was devised that would allow for a quick means of contacting either a user or a group of users. A problem that IMPETUS has continuously faced is that of organizing the contact information of all its associated people. There was no quick way to contact students and contacting teachers involved sorting through contact lists.
+
+As a solution to this, the Collaborative Environment has a simple messaging system that allows for contacting any of the systems registered users. One may send a message to just an individual, a group of individuals, or even an entire class of users quickly. The system keeps track of messages internally, but is capable of notifying a user of a new message via email if they have an email address associated with their account.
+
+\subsubsection{Design}
 test
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.4\textwidth]{figures/er/message.pdf}
+	}
+	\caption{Message and Message Recipient EER}
+	\label{fig:er-message}
+\end{figure}
+
+\subsubsection{Implementation}
+test
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-new}
+	}
+	\caption{A student sends a new message to their teacher.}
+	\label{fig:screens-message-new}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-list}
+	}
+	\caption{A teacher views their message list.}
+	\label{fig:screens-mesasge-list}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-reply}
+	}
+	\caption{A teacher replies to a student's message.}
+	\label{fig:screens-message-reply}
+\end{figure}
 
 %%%% Analytics
 \subsection{Analytics}
