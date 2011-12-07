@@ -7,6 +7,12 @@
 \usepackage{titlesec}
 \usepackage{paralist}
 \usepackage{url}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+
+%% Custom L table column type for fixed width
+\newcolumntype{L}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 %% Adjust title spacing and borders.
 \titleformat{\chapter}[display]
@@ -136,6 +142,7 @@ Date \hspace{2in} Dean
 
 \begin{appendices}
 \include{appendix/user_manual}
+\include{appendix/analytics}
 \end{appendices}
 
 \end{document}

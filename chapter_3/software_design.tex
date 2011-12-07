@@ -398,6 +398,44 @@ Viewing a message will open the chain of messages with the parent at the top. In
 %%%% Analytics
 \subsection{Analytics}
 \label{subsec:design-analytics}
-test
+As stated in \S \ref{sec:motivation}, a motivation behind creating the Collaborative Environment is to collect data about the individuals using it, in particular, the students. The methods that have been described for storing and organizing student personal data (\S \ref{subsec:design-user}), educational data (\S \ref{subsec:design-user} and \S \ref{subsec:design-district}), and quiz results (\S \ref{subsec:design-quiz}) also need retrieval methods that will combine said data into more meaningful representations.
+
+An organization funded by STEP must submit, each a year, a report to the Education Department that summarizes data about the participants, activities, program content, and outcomes. This summary data is required in a tabular form as specified by a master report form which the Education Department provides \cite{reportryan-doc}, examples of which are a participant roster, participating school roster, student assessment scores, SAT scores, and student graduate placement.
+
+The Collaborative Environment uses the data it collects to output a web based version of the state-requested information in a format that matches what is expected by the annual report. Additionally, it will output the same data as a comma-separated value (CSV) file for manipulation and more advanced processing via a spreadsheet program.
+
+\subsubsection{Design}
+Gathering the data to output is a straightforward process when using the tables described in the previous sections, it is just a matter of constructing database queries to get the result you want. Once a result set of a data has been generated, outputting it depends on how it was requested.
+
+A result set can be returned to the requesting user as either an HTML table on a webpage or as a CSV file to be downloaded. Both of these formats are basically tables, just one has all of its data wrapped by HTML tags and the other by commas. This is an ideal scenario for the use of abstraction which Figure \ref{fig:uml-analytics} outlines.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/uml/analytics.pdf}
+	}
+	\caption{Analytics UML Object Diagram}
+	\label{fig:uml-analytics}
+\end{figure}
+
+Since all analytical queries will have a result set of data that is tabular in nature, we can abstract that notion into \texttt{AbstractResult}. It basically represents that idea that results will have to be outputted based on one of two formats, either HTML or CSV, but how exactly that is done is left up to a specific implementation (e.g. a table of participants in STEP will look and be implemented differently than from a table of how many males in each grade of each ethnicity participated in STEP for a given year).
+
+The \texttt{SimpleResult} implementation is for outputting a result set where each row's cells are independent of each other (i.e. the value of one will not influence the value of another). An example of this would be outputting a list of user: the result set is just every row of the user table. One the other hand the \texttt{ComplexResult} implementation is used for outputting a result set where some columns are dependent on others. For example, the Collaborative Environment keeps track of an arbitrary set of activities that student participation in will be tracked. If one were to query for how many participants are enrolled in each activity, that number is, obviously, dependent on the activity and, as such, two queries must occur: first for all activities, then for each activity, query for how many students participate in it.
+
+Sometimes a result set must be generated that does not fit the simple or complex implementations, in which case a more specialized implementation is needed, as is the case with \texttt{StudentsServedResult}. In this case, it can handle outputting two result sets at once.
+
+The abstract design allows for a lot of code reuse as well as the flexibility to handle unique circumstances.
+
+\subsubsection{Implementation}
+The current implementation of the Collaborative Environment only allows administrators to access the analytics menu, which can be seen in Figure \ref{fig:screens-analytics-list}. This list provides access to the current analytical tables HTML and CSV formats. Adding support for all of the tables that the Education Department requires be filled out annually is part of the project's future work. It is worth nothing that all of data that will be outputted is year dependent and based on the currently selected academic year. Screenshots can be found in Appendix \ref{chap:analytical-appendix}.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/analytics/analytics-list}
+	}
+	\caption{The currently implemented analytical tools available to an administrator.}
+	\label{fig:screens-analytics-list}
+\end{figure}
 
 \section{Known Issues}
