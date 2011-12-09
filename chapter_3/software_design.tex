@@ -234,7 +234,12 @@ test
 A system by which teachers and teaching assistants can create assessments of their student's knowledge is one of the key collaborative goals of this system. By allowing teachers and teaching assistants to create quizzes quickly and easily, it will allow them to get valuable feedback from their students. From the student's perspective, they'll have access to a means of studying and brushing up on topics that they might feel they are struggling with. A quiz can be made about any topic, but when used in conjunction with the learning pathway, as described in \S \ref{subsec:design-pathway}, it creates a rich means of showing students the topics they need to know (based on state standards) while providing them with the resources to succeed.
 
 \subsubsection{Design}
-A quiz in the Collaborative Environment can be broken up into two sets of relationships: a quiz, its questions, and its questions answers and a student, their attempt at a quiz, and how they performed on each question during that attempt. Figure \ref{fig:er-quiz} shows that one quiz may have multiple questions and that a question may have multiple answers. This approach allows for two different types of questions to be used in a quiz: short answer and multiple choice. If a quiz question only has one answer, then it is a short answer, whereas if it has multiple answers then it is clearly a multiple choice question.
+A quiz in the Collaborative Environment can be broken up into two sets of relationships:
+\begin{inparaenum}[\itshape 1\upshape)]
+	\item a quiz, its questions, and its question's answers; and
+	\item a student, their attempt at a quiz, and how they performed on each question during that attempt.
+\end{inparaenum}
+Figure \ref{fig:er-quiz} shows that one quiz may have multiple questions and that a question may have multiple answers. This approach allows for two different types of questions to be used in a quiz: short answer and multiple choice. If a quiz question only has one answer, then it is a short answer, whereas if it has multiple answers then it is clearly a multiple choice question.
 
 \begin{figure}[h!]
 	\centering
@@ -321,10 +326,14 @@ Once students start answering quizzes, teachers and teaching assistants are able
 %%%% Survey
 \subsection{Survey System}
 \label{subsec:design-survey}
-test
+Having an integrated survey system as part of the Collaborative Environment is critical not only for the collection of data, but also for tracking student participation. If a student is not actively participating, then this can be treated as an early intervention indicator thus allowing them to receive more attention. Having surveys be integrated with the rest of the Collaborative Environment, as opposed to outsourcing this functionality to another service (e.g. Google Docs Spreadsheet forms), allows for all centralization of student data. Had this data been available in several spots, it would then require aggregation which might result in a loss of data.
 
 \subsubsection{Design}
-test
+A survey is designed in a nearly identical fashion to that of a quiz. The only difference being that a survey is not allowed to have multiple submissions by the same user (whereas with quizzes, a single user may attempt the same quiz numerous times). Surveys can also be broken up into two sets of relationships:
+\begin{inparaenum}[\itshape 1\upshape)]
+	\item a survey, its questions, and its question's answers; and
+	\item a user, their submission of a survey, and what they answered for each question in that submission.
+\end{inparaenum}
 
 \begin{figure}[h!]
 	\centering
@@ -335,8 +344,56 @@ test
 	\label{fig:er-survey}
 \end{figure}
 
+Figure \ref{fig:er-survey} shows that one survey may have multiple questions and that a question may have multiple answers. A survey question may be one of three types: multiple choice, short answer, and a likert scale. A likert scale question is a shorthand for making a multiple choice question with these answers: ``disagree strongly'', ``disagree'', ``disagree somewhat'', ``no opinion'', ``agree'', ``agree somewhat'', and ``agree strongly''.
+
+Storing what each user's answers for a particular question in a survey requires that there exist a many-to-many relationship between a survey submission and a survey question called result. Each result is able to store the answer a user provided.
+
 \subsubsection{Implementation}
-test
+Privileged users are permitted to create surveys and do so using the interface seen in Figure \ref{fig:screens-survey-new}. The creator must supply a name for the survey and, optionally, instructions for the survey participants to follow. Following this, they may add as many of the three possible question types (multiple choice, short answer, and scale) as are necessary.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-list}
+	}
+	\caption{A student views a list of incomplete and completed surveys.}
+	\label{fig:screens-survey-list}
+\end{figure}
+
+\begin{figure}[p!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-new}
+	}
+	\caption{A teacher creates a new survey.}
+	\label{fig:screens-survey-new}
+\end{figure}
+
+The first question in Figure \ref{fig:screens-survey-new} is a multiple choice question. Once the text is added, the creator may add as many possible answers as necessary to the question. The next question in a short answer, allowing a participant to freely type in an answer. Lastly, a there is a scale question. The agreement scale will automatically be output when someone views the survey.
+
+As a student that is interested in participating in a survey, they would first encounter a list of  surveys organized by their completion state. A survey can only be completed once so the list of italicized entries is just to act as proof of submission. In Figure \ref{fig:screens-survey-list}, the survey being created in Figure \ref{fig:screens-survey-new}, ``College Survey'', is now available to completed.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-show}
+	}
+	\caption{A student attempts a new survey.}
+	\label{fig:screens-survey-show}
+\end{figure}
+
+Upon choosing to participate in the ``College Survey'', the student will complete it using the interface show in Figure \ref{fig:screens-survey-show}. Once a submission occurs, a student will not be allowed to see either the results or what they submitted. This is reserved for privileged users.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-results}
+	}
+	\caption{A teacher views the results of a survey.}
+	\label{fig:screens-survey-results}
+\end{figure}
+
+At any time after a survey has been released, its live results can be viewed by privileged users via an interface such as the one seen in Figure \ref{fig:screens-survey-results}. For each question in the survey, if the question was multiple choice or a scale, then the number and percentage of each answer is provided. If the question was a short answer, then an accumulation of the answers is provided. Additionally, a list and total number of participants is shown below the question data.
 
 %%%% Messaging
 \subsection{Messaging}
@@ -438,4 +495,4 @@ The current implementation of the Collaborative Environment only allows administ
 	\label{fig:screens-analytics-list}
 \end{figure}
 
-\section{Known Issues}
+\section{Summary}

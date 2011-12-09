@@ -1,53 +1,63 @@
 \chapter{User Survey}
 \label{chap:usability}
 
+In this chapter, the details and results of a user survey that was conducted are described.
+
 \section{Study Goals}
+As stated in \S \ref{sec:methodology}, the Collaborative Environment is being developed using a modified waterfall model. This means that the verification stage can lead back to the requirements or design stage. The idea is that the feedback received while verifying very often leads to uncovering flaws in the design.
+
+There are two motivations behind performing this study:
+\begin{enumerate}
+	\item To gather an initial set of qualitative data for future quantification; and
+	\item To get comments and suggestions regarding the features.
+\end{enumerate}
+
+Even though only one usability test was conducted, the answers to its qualitative questions should provide some insight into effectiveness of the Collaborative Environment.
 
 \section{Participants}
+IMPETUS administrators, teachers, and graduate fellows were given the opportunity to participate in this user study. These classes of users were chosen because they would have access to the most breadth of implemented features in the Collaborative Environment. The candidates had not had any prior hand-on experience with this system and only knew of its development (i.e. there was no familiarity bias) and were asked to participate during an IMPETUS campus event hosted at Clarkson University. Participants were given a unique set of credentials at the start of the survey to use in the demo installation of the Collaborative Environment. This was to ensure that all participants would have access to an identical set of data in the system.
 
 \section{Procedure}
+The survey was created using a Google Docs Spreadsheet form and designed to be used as a guide through a series of typical interactions with the Collaborative Environment. In particular, the participants played the role of a teacher and, as the survey instructed them on what tasks to perform, it also acted as a way for them to leave feedback as they proceeded. To accomplish this, the participant needed the survey open in one browser tab/window and the Collaborative Environment open in a second then switch between them.
+
+\section{Responses}
+Throughout the survey, users faced four varieties of questions, each of which served a different purpose:
+
+\begin{description}
+	\item [Likert Scale -- Agreement] \hfill \\ These opinion questions have the participant rate their own responses. They can provide fine grain insight into larger pieces of software, but are most valuable when compared to additional iterations of a survey. When comparing two sets of survey results it is possible to quantify the changes.
+	\item [Likert Scale -- Satisfaction] \hfill \\ These broad questions allow for a generalization of opinion regarding a large system feature. When used in conjunction with a short answer question, those that are dissatisfied are able to say exactly why.
+	\item [Short Answer] \hfill \\ Gives the participant the flexibility to say whatever they would like.
+	\item [Qualitative Multiple Choice] \hfill \\ Questions of this type have a correct answer. They are like sanity checks and can be used to judge whether or not users are actually able to perform a task rather than just provide an opinion.
+\end{description}
 
 \section{Results}
 
-\begin{table}
+
+\begin{table}[h!]
 \centering
 \small{
-\begin{tabular}{| L{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
+\begin{tabular}{| C{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
 	\multicolumn{1}{c}{Question} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Disagree Strongly
-		\end{rotate}
+		\rot{Disagree Strongly}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Disagree Somewhat
-		\end{rotate}
+		\rot{Disagree Somewhat}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Disagree
-		\end{rotate}
+		\rot{Disagree}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Neither
-		\end{rotate}
+		\rot{Neither}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Agree
-		\end{rotate}
+		\rot{Agree}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Agree Somewhat
-		\end{rotate}
+		\rot{Agree Somewhat}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Agree Strongly
-		\end{rotate}
+		\rot{Agree Strongly}
 	} \\ \hline
 \hline Logging in is too complex.
 	& \textbf{67\% \newline (12)} & 11\% \newline (2) & 6\% \newline (1) & 11\% \newline (2) & 6\% \newline (1) & - & - \\
@@ -74,41 +84,31 @@
 \hline
 \end{tabular}
 }
-\caption{Survey Agreement Questions and Results}
+\caption{Likert Scale -- Agreement: Questions and Results}
 \label{table:agreement}
 \end{table}
 
 test
 
-\begin{table}
+\begin{table}[h!]
 \centering
 \small{
-\begin{tabular}{| L{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
+\begin{tabular}{| C{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
 \multicolumn{1}{c}{Question} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Grade 9
-		\end{rotate}
+		\rot{Grade 9}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Grade 10
-		\end{rotate}
+		\rot{Grade 10}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Grade 11
-		\end{rotate}
+		\rot{Grade 11}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Grade 12
-		\end{rotate}
+		\rot{Grade 12}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Unsure
-		\end{rotate}
+		\rot{Unsure}
 	} \\ \hline
 \hline What grade is Sally in during Academic Year 2010?
 	& - & - & \textbf{83\% \newline (15)} & 11\% \newline (2) & 6\% \newline(1) \\
@@ -121,35 +121,25 @@ test
 
 test
 
-\begin{table}
+\begin{table}[h!]
 \centering
 \small{
-\begin{tabular}{| L{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
+\begin{tabular}{| C{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
 	\multicolumn{1}{c}{How satisfied are you with ... ?} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Extremely dissatisfied
-		\end{rotate}
+		\rot{Extremely dissatisfied}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Dissatisfied
-		\end{rotate}
+		\rot{Dissatisfied}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Neither
-		\end{rotate}
+		\rot{Neither}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Satisfied
-		\end{rotate}
+		\rot{Satisfied}
 	} &
 	\multicolumn{1}{c}{
-		\begin{rotate}{45}
-			Extremely satisfied
-		\end{rotate}
+		\rot{Extremely satisfied}
 	} \\ \hline
 \hline The live user search feature
 	& 6\% \newline (1) & 6\% \newline (1) & 22\% \newline (4) & 28\% \newline (5) & \textbf{39\% \newline (7)} \\
@@ -168,7 +158,7 @@ test
 \hline Survey creation
 	& - & - & 17\% \newline (3) & \textbf{56\% \newline (10)} & 28\% \newline (5) \\
 \hline Survey results
-	& - & - & 17\% \newline (3) & 44\% \newline (8) & 39\% \newline (7) \\
+	& - & - & 17\% \newline (3) & \textbf{44\% \newline (8)} & 39\% \newline (7) \\
 \hline Quiz creation
 	& - & 11\% \newline (2) & \textbf{33\% \newline (6)} & \textbf{33\% \newline (6)} & 22\% \newline (4) \\
 \hline Quiz results
@@ -178,7 +168,7 @@ test
 \hline
 \end{tabular}
 }
-\caption{Survey Satisfaction Questions and Results}
+\caption{Likert Scale -- Satisfaction: Questions and Results}
 \label{table:satisfaction}
 \end{table}
 

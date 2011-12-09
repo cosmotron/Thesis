@@ -1,35 +1,39 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Year Enhanced Entity-Relationship (EER) Diagram}}{16}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Year Selector Highlight}}{17}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces User and Role EER Diagram}}{19}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Student user EER Diagram}}{20}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces A privileged user's view of all the system's users.}}{21}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces A privileged user editing a student's account.}}{22}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces A privileged user's view of a student's profile.}}{23}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces District and Roster EER}}{24}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces An administrator's view of all the system's districts.}}{25}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces A privileged user editing a district.}}{26}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Quiz and Quiz Result EER}}{28}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces A privileged user creating a quiz.}}{29}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces A student's list of available quizzes.}}{30}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces A student attempts a new quiz.}}{31}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces A student receives the results of their quiz attempt.}}{32}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces A student views all of their attempts at a quiz.}}{32}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces A teacher views the quiz results of the students in their district.}}{33}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Survey and Survey Submission EER}}{34}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Message and Message Recipient EER}}{35}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces A student sends a new message to their teacher.}}{36}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces A teacher views their message list.}}{37}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces A teacher replies to a student's message.}}{38}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces Analytics UML Object Diagram}}{39}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces The currently implemented analytical tools available to an administrator.}}{40}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Year Enhanced Entity-Relationship (EER) Diagram}}{18}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Year Selector Highlight}}{19}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces User and Role EER Diagram}}{21}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Student user EER Diagram}}{22}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces A privileged user's view of all the system's users.}}{23}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces A privileged user editing a student's account.}}{24}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces A privileged user's view of a student's profile.}}{25}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces District and Roster EER}}{26}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces An administrator's view of all the system's districts.}}{27}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces A privileged user editing a district.}}{28}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Quiz and Quiz Result EER}}{30}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces A privileged user creating a quiz.}}{31}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces A student's list of available quizzes.}}{32}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces A student attempts a new quiz.}}{33}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces A student receives the results of their quiz attempt.}}{34}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces A student views all of their attempts at a quiz.}}{34}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces A teacher views the quiz results of the students in their district.}}{35}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Survey and Survey Submission EER}}{36}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces A student views a list of incomplete and completed surveys.}}{37}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces A teacher creates a new survey.}}{38}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces A student attempts a new survey.}}{39}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces A teacher views the results of a survey.}}{40}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Message and Message Recipient EER}}{41}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces A student sends a new message to their teacher.}}{42}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces A teacher views their message list.}}{43}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces A teacher replies to a student's message.}}{44}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Analytics UML Object Diagram}}{45}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces The currently implemented analytical tools available to an administrator.}}{47}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Sample listing of all STEP student participants.}}{48}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Sample listing of the number of students of each ethnicity in grades 7-12 grouped by gender.}}{49}
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Sample listing of the number of students participating in each activity.}}{50}
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Sample listing of each graduating student and details of the college they will attend.}}{50}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Sample listing of all STEP student participants.}}{56}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Sample listing of the number of students of each ethnicity in grades 7-12 grouped by gender.}}{57}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Sample listing of the number of students participating in each activity.}}{58}
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Sample listing of each graduating student and details of the college they will attend.}}{58}
