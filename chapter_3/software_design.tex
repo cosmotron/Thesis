@@ -218,15 +218,66 @@ When editing or adding a district, the user will use the interface displayed in 
 
 Each new academic year, a roster will need to be created that ties the districts to that new year. This can be a tiresome activity, especially if a district has a lot of users that need to be associated with it. To try to ease this process, there is an import feature which will simply look at the previous year's roster for the current district and copy it to the current year's roster. It will also automatically increment the student's grades by one; this is due to the assumption that a majority of students will advance to the next grade.
 
+%%%% Learning Pathway
 \subsection{Learning Pathway}
 \label{subsec:design-pathway}
-test
+While exploring the use of the Khan Academy video and exercise educational resources, we took note of a tool which they call a Knowledge Map (see Figure \ref{fig:screens-pathway-khan-map}). They advertise this map as an organization of all the site's exercises that is capable of suggesting the best exercises for the student to work on and can remind them when they seem to need a review \cite{khanacademy-about}. Due to the open source licensing of the Khan Academy, we adopted this idea to better suit the needs of IMPETUS.
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/screens/pathway/khan-map}
+	}
+	\caption{Khan Academy Knowledge Map}
+	\label{fig:screens-pathway-khan-map}
+\end{figure}
+
+In the Khan Academy Knowledge Map, clicking on a node takes the student directly to the exercise that is associated with it. For the Collaborative Environment, we wanted one layer of abstraction to sit between the clicking on a node and going to an assessment. This abstraction (i.e. a ``node details'' screen) would be able to provide a link to the state standard justifying its existence in the map, links to quizzes built using the Collaborative Environment, and links to educational resources (such as videos at the Khan Academy) that will aid the student in achieving mastering in the quizzes.
 
 \subsubsection{Design}
-test
+The learning pathway is a tree structure containing nodes and edges. This can be translated into a database by having a node table with a many-to-many relationship with itself (see Figure \ref{fig:er-pathway}). The join table for this relationship holds any given node's parent node(s). To keep track of where a node should appear, it has a horizontal and vertical position (\emph{h\_pos} and \emph{v\_pos}). Lastly a node needs a link to its details which are, as described above, links to educational resources and quizzes.
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.7\textwidth]{figures/er/pathway.pdf}
+	}
+	\caption{Learning Pathway EER}
+	\label{fig:er-pathway}
+\end{figure}
 
 \subsubsection{Implementation}
-test
+The tree itself is drawn using the Google Maps API such that each node is a map marker and its edges are line segments. All the nodes are retrieved from the database and drawn to the screen at the their appropriate coordinates. Each node is given one of three color templates: neutral, completed, and incomplete. Completed nodes appear as green and indicate that the student has achieved a perfect score on the quizzes associated with the node. Incomplete nodes appear as red and used when a student has attempted the quizzes, but has not achieved a perfect score yet. Neutral nodes appear as white and are used when a student has made no attempts at the node's quizzes. Next, all of the node relationships are queried for and then drawn to the screen. Using the Google Maps API gives some nice flexibility such as panning around a large tree when it gets too large. 
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/pathway/pathway-graph}
+	}
+	\caption{A student views their current learning pathway.}
+	\label{fig:screens-pathway-graph}
+\end{figure}
+
+In Figure \ref{fig:screens-pathway-graph}, we see the final output of one student's learning pathway. The layout will appear the same for all students, but the coloring of nodes is, of course, dependent on their individual performance. The graph in this figure represents IMPETUS' interpretation of the Common Core State Standards \cite{common-core-website}.
+
+Clicking on a node will take the student to a details page that contain links to:
+\begin{inparaenum}[\itshape 1\upshape)]
+	\item the state standard providing justification for learning this topic;
+	\item quizzes that teachers or teaching assistants make for this topoc; and
+	\item educational resources to aid in learning the material, such as links to videos at the Khan Academy.
+\end{inparaenum}
+
+\begin{figure}[h!]
+	\centering
+	\fbox{
+		\includegraphics[width=0.8\textwidth]{figures/screens/pathway/pathway-node}
+	}
+	\caption{A student views their progress in the ``Linear Equations 2'' pathway node.}
+	\label{fig:screens-pathway-node}
+\end{figure}
+
+In Figure \ref{fig:screens-pathway-node} each of these link varieties can be seen. The quiz section also lists and links to the last attempt the student made at this. Since it is not a perfect score, that is why the node for ``Linear Equations 2'' was marked as incomplete. Details of creating this quiz and making that attempt can be found in \S \ref{subsec:design-quiz}.
+
+A current limitation of this system is that adding new nodes and rearranging existing ones in the tree is a tedious and manual process.
 
 %%%% Quiz
 \subsection{Quiz System}

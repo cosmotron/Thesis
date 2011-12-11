@@ -18,20 +18,51 @@ Even though only one usability test was conducted, the answers to its qualitativ
 IMPETUS administrators, teachers, and graduate fellows were given the opportunity to participate in this user study. These classes of users were chosen because they would have access to the most breadth of implemented features in the Collaborative Environment. The candidates had not had any prior hand-on experience with this system and only knew of its development (i.e. there was no familiarity bias) and were asked to participate during an IMPETUS campus event hosted at Clarkson University. Participants were given a unique set of credentials at the start of the survey to use in the demo installation of the Collaborative Environment. This was to ensure that all participants would have access to an identical set of data in the system.
 
 \section{Procedure}
-The survey was created using a Google Docs Spreadsheet form and designed to be used as a guide through a series of typical interactions with the Collaborative Environment. In particular, the participants played the role of a teacher and, as the survey instructed them on what tasks to perform, it also acted as a way for them to leave feedback as they proceeded. To accomplish this, the participant needed the survey open in one browser tab/window and the Collaborative Environment open in a second then switch between them.
+The survey was created using a Google Docs Spreadsheet form and designed to be used as a guide through a series of typical interactions with the Collaborative Environment. In particular, the participants played the role of a teacher and, as the survey instructed them on what tasks to perform (but not \emph{how} to perform them), it also acted as a way for them to leave feedback as they proceeded. To accomplish this, the participant needed the survey open in one browser tab/window and the Collaborative Environment open in a second then switch between them. The survey was split up into eight sections primarily focusing on a site feature (Login, Academic Year Switching and Student Data, Editing Users, Adding Users, District Management, Messaging, Surveys, Quizzes) and finished with a generalized set of questions focusing on the site as a whole.
 
 \section{Responses}
-Throughout the survey, users faced four varieties of questions, each of which served a different purpose:
+Throughout the survey, participants faced four varieties of questions, each of which served a different purpose:
 
 \begin{description}
-	\item [Likert Scale -- Agreement] \hfill \\ These opinion questions have the participant rate their own responses. They can provide fine grain insight into larger pieces of software, but are most valuable when compared to additional iterations of a survey. When comparing two sets of survey results it is possible to quantify the changes.
-	\item [Likert Scale -- Satisfaction] \hfill \\ These broad questions allow for a generalization of opinion regarding a large system feature. When used in conjunction with a short answer question, those that are dissatisfied are able to say exactly why.
-	\item [Short Answer] \hfill \\ Gives the participant the flexibility to say whatever they would like.
+	\item [Likert Scale -- Agreement] \hfill \\ These opinion questions have the participant rate their own responses. In this survey they are used to see gather opinions on the clarity, difficulty, and intuitiveness of features.
+	\item [Likert Scale -- Satisfaction] \hfill \\ These broad questions allow for a generalization of opinion regarding a large system feature.
 	\item [Qualitative Multiple Choice] \hfill \\ Questions of this type have a correct answer. They are like sanity checks and can be used to judge whether or not users are actually able to perform a task rather than just provide an opinion.
+	\item [Short Answer] \hfill \\ Gives the participant the flexibility to say whatever they would like. Scale questions are often accompanied by at least one short answer question to allow exact impression/opinions to be stated.
 \end{description}
 
-\section{Results}
+Due to the agreement and satisfaction question being subjective and qualitative in nature, it would be ideal to perform numerous usability surveys to track the \emph{changes} to their responses. These changes would be quantitative data regarding the redesigns and implementations after each validation stage of the software's development.
 
+\section{Results}
+In total, the survey had 18 participants. As described in the preceding sections, the survey was broken up into eight sections, each of which contained a mixture of questions. These questions were designed to provide insight into how some of the Collaborative Environment's target users perceive its utility. The proceeding subsections describe each of the eight sections responses. Table \ref{table:agreement}, Table \ref{table:year}, and Table \ref{table:satisfaction} provide the accumulated sets of the survey's scale and multiple choice questions and answers.
+
+\subsection*{Login}
+The first part of the survey involved having the user simply log into the system using the provided credentials. When asked if this process was too complex, 84\% disagreed to some extent and an additional 11\% had no opinion on the matter. One participant stated that they believe most users will see this as a familiar process while another offered the suggestion to include a way to recover a forgotten password.
+
+\subsection*{Academic Years and Student Data}
+Participants were given a brief description of the concept behind on-the-fly switching of academic years and what types of data it could be used to compare. They were then asked what grade a student named Sally was in during the year 2010. This required switching from academic year 2011 to 2010 and then viewing Sally's profile. 83\% of the participants got this correct. 11\% incorrectly chose Sally as being in 12th grade, indicating that the participant did not realize they were not viewing 2011 data to begin with. Additionally, when asked if switching between academic years was easy, 84\% were in agreement.
+
+While looking for what grade Sally was in, users were also asked to look at the types of data they could see about a student and asked what they felt should be added, if anything. The most common response was the number of years a student has been a participant in the the IMPETUS program.
+
+\subsection*{Editing a User}
+After ensuring that academic year 2011 was the current academic year, participants were told to edit a user by adding Physics to their list of enrolled courses and adding an SAT Math score of 750 to their list of standardized exams. When asked if navigating to the user editor was easy, only 72\% agreed. Participant comments informed us that the link to the user editor was not in a spot that necessarily made sense. They would have preferred it to be in the profile viewer rather than only in the list of users. Overall, 89\% of the participants expressed satisfaction with this feature
+
+\subsection*{Adding a User}
+When asked to add a new user to the system, 84\% agreed that this task could be easily accomplished. A comment was made suggesting that the navigation required to add users be modified to require less clicks. This way, when performing the task in batch, it will reduce the overall time needed to finish. Just as with editing users, 89\% were satisfied to some degree with this feature.
+
+\subsection*{District Management}
+Participants were asked to add the user created in the last step to the district they district they had access to. Unfortunately, there was a change in how the add user feature worked due to a software bug and resulted in the directions for this section to be incorrect. This undoubtedly led to confusion for the participants as 23\% noted. Comments regarding this were the most prevalent that were recorded.
+
+\subsection*{Messaging}
+The messaging system was explained to the participants and were asked to send a message to a user and view a thread of existing messages. Again, 84\% of users felt this message system was intuitive and expressed a degree of satisfaction.
+
+\subsection*{Surveys}
+Participants were told to explore this feature by creating, taking, and viewing the results of surveys. Explanations were not explicitly given in the instructions as this feature has a built-in help feature. When asked if creating surveys was confusing, 89\% disagreed. Most comments mentioned a need for editing surveys once they have been created. This is a current limitation of the survey system. Participants were also asked their opinions on the data presented in the survey results viewer, to which providing graphs for the data was the most common suggestion. About 84\% stated satisfaction with the survey system.
+
+\subsection*{Quizzes}
+Just as with surveys, participants were told to explore the quiz feature by creating, attempting, and viewing the results of a quiz. A help page was also featured that explained the quiz creator in detail. Only 45\% of the users felt that the quiz creator was not confusing and 55\% expressed satisfaction with it. The most prevalent comment made about this involved not understanding how adding multiple answers to generate a multiple choice problem worked, namely due to poor labeling of the text fields.
+
+\subsection*{Overall}
+As a conclusion to the survey, the participants were asked their overall satisfaction with the program as it was presented to them and what they would like to see added. 89\% stated they were satisfied while the remaining 11\% were neutral. The most requested additional features were quiz/survey editing and adding recent news events and pictures.
 
 \begin{table}[h!]
 \centering
@@ -39,25 +70,25 @@ Throughout the survey, users faced four varieties of questions, each of which se
 \begin{tabular}{| C{8cm} |p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
 	\multicolumn{1}{c}{Question} &
 	\multicolumn{1}{c}{
-		\rot{Disagree Strongly}
+		\rot{Disagree strongly}
 	} &
 	\multicolumn{1}{c}{
-		\rot{Disagree Somewhat}
+		\rot{Disagree somewhat}
 	} &
 	\multicolumn{1}{c}{
 		\rot{Disagree}
 	} &
 	\multicolumn{1}{c}{
-		\rot{Neither}
+		\rot{Neither agree nor disagree}
 	} &
 	\multicolumn{1}{c}{
 		\rot{Agree}
 	} &
 	\multicolumn{1}{c}{
-		\rot{Agree Somewhat}
+		\rot{Agree somewhat}
 	} &
 	\multicolumn{1}{c}{
-		\rot{Agree Strongly}
+		\rot{Agree strongly}
 	} \\ \hline
 \hline Logging in is too complex.
 	& \textbf{67\% \newline (12)} & 11\% \newline (2) & 6\% \newline (1) & 11\% \newline (2) & 6\% \newline (1) & - & - \\
@@ -84,11 +115,9 @@ Throughout the survey, users faced four varieties of questions, each of which se
 \hline
 \end{tabular}
 }
-\caption{Likert Scale -- Agreement: Questions and Results}
+\caption{Likert Scale -- Agreement: Questions and Results ($N = 18$)}
 \label{table:agreement}
 \end{table}
-
-test
 
 \begin{table}[h!]
 \centering
@@ -115,11 +144,9 @@ test
 \hline
 \end{tabular}
 }
-\caption{Results of a test to see if year switching is accomplishable; Grade 11 is correct.}
+\caption{Qualitative Multiple Choice: Academic Year Proficiency;  Grade 11 is correct. ($N = 18$)}
 \label{table:year}
 \end{table}
-
-test
 
 \begin{table}[h!]
 \centering
@@ -133,7 +160,7 @@ test
 		\rot{Dissatisfied}
 	} &
 	\multicolumn{1}{c}{
-		\rot{Neither}
+		\rot{Neutral}
 	} &
 	\multicolumn{1}{c}{
 		\rot{Satisfied}
@@ -168,8 +195,6 @@ test
 \hline
 \end{tabular}
 }
-\caption{Likert Scale -- Satisfaction: Questions and Results}
+\caption{Likert Scale -- Satisfaction: Questions and Results ($N = 18$)}
 \label{table:satisfaction}
 \end{table}
-
-test
