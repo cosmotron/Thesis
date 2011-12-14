@@ -1,11 +1,8 @@
-*.aux
-*.bbl
-*.blg
-*.DS_Store
 *.gz
 *.log
-*.nav
-*.out
-*.snm
-*.texshop
+*.aux
 *.toc
+*.blg
+*.bbl
+*.texshop
+*.DS_Store
