@@ -5,9 +5,10 @@
 This section will provide details of the existing software and services that are leveraged to create the Collaborative Environment. For each, we provide the reasoning for its use as well as a technical description.
 
 \subsection{Symfony}
+\label{subsec:design-background-symfony}
 The Collaborative Environment is built using Symfony Standard Edition, an open-source, object-oriented PHP framework designed around the Model-View-Controller (MVC) software architecture. Using Symfony to create the Collaborative Environment encourages the use of design patterns that are well understood and allows for more of the development time to focus on application features rather than reimplementing standard components of web applications.
 
-The MVC architecture separates an application's business logic, that is, all of the algorithms which process the exchange of data between an interface and a database, from its user interfaces. The \emph{model} consists of object representations of application data (Entities) and a persistence layer, which will store and retrieve entities via a databases management system. The \emph{view} will render a model object into a user interface, such as a web page. The \emph{controller} is what mediates transactions between the user and the application. The typical control flow of a basic MVC application is:
+The MVC architecture separates an application's business logic, that is, all of the algorithms which process the exchange of data between an interface and a database, from its user interfaces. The \emph{model} consists of object representations of application data (Entities) and a persistence layer, which will store and retrieve entities via a database management system. The \emph{view} will render a model object into a user interface, such as a web page. The \emph{controller} is what mediates transactions between the user and the application. The typical control flow of a basic MVC application is:
 
 \begin{singlespacing}
 \begin{enumerate}
@@ -29,7 +30,7 @@ Controllers are aware of what the current user's authentication is and, as such,
 These features provide the Collaborative Environment with a powerful and robust mechanism that is essential to securing the Student data being tracked.
 
 \subsubsection{Doctrine}
-In a dynamic web application, Entities are constantly being created, read, update, and deleted. To keep track of these changes, it is natural to consider using a database management system (DBMS) such as MySQL or PostgreSQL. In an object-oriented program, these Entities often contain non-scalar data (e.g. lists, arrays) that must be persisted by a DBMS, which can be problematic because a DBMS can often only store scalar data (e.g. strings, integers). Using an object-relational mapper (ORM), such as Doctrine, solves this problem by managing the transformation to and from scalars/non-scalars when persisting an object.
+In a dynamic web application, Entities are constantly being created, read, updated, and deleted. To keep track of these changes, it is natural to consider using a database management system (DBMS) such as MySQL or PostgreSQL. In an object-oriented program, these Entities often contain non-scalar data (e.g. lists, arrays) that must be persisted by a DBMS, which can be problematic because a DBMS can often only store scalar data (e.g. strings, integers). Using an object-relational mapper (ORM), such as Doctrine, solves this problem by managing the transformation to and from scalars/non-scalars when persisting an object.
 
 As an example of how an ORM operates, let's consider an object-oriented system where a Student is enrolled in a set of Courses. Naturally, we would have two Entity objects, Student and Course. The fields of the Student entity could be an ID, a name, and a list of Courses that they're enrolled in (consider this to be a many-to-many relationship). The fields of the Course Entity could be a name and number. When a new Student has been created and they are enrolled in, perhaps, two different Courses and the ORM is told to persist this data, it will store the scalar data in the  DBMS as its native types (names map to varchar, IDs and numbers map to integer), but for the Student's list of enrolled courses, since we established that there is a many-to-many relationship, the ORM will manage a Student ID-Course number tuple (Student 1 is enrolled in Course 1, Student 1 is enrolled in Course 2). Of course, when this data is requested from the DBMS, the ORM will convert the data back into Entity objects.
 
@@ -45,9 +46,9 @@ There are many benefits to using a template engine, such as:
 \end{description}
 
 \subsection{Khan Academy}
-The Khan Academy is a nonprofit organization that aims to better global education by providing free, high-quality resources to anyone anywhere. \cite{khan-website-about} On their website, they provide in excess of 2700 videos that teach varying topics in STEM fields. The organization has been provided with the financial support and public accolades of large entities such as The Bill \& Melinda Gates Foundation and Google \cite{khan-wiki-sources} indicating that they produce noteworthy content. The videos that Khan Academy hosts are all created by Salman Khan who holds an MBA from Harvard and three science degrees from MIT. Each is produced in a fairly consistent manner using a software whiteboard, a screen capture program, and a microphone while typically lasting about 10 minutes.
+The Khan Academy is a nonprofit organization that aims to better global education by providing free, high-quality resources to anyone anywhere. \cite{khan-website-about} On their website, they provide in excess of 2700 videos that teach varying topics in STEM fields. The organization has been provided with the financial support and public accolades of large entities such as The Bill \& Melinda Gates Foundation and Google \cite{tech-award, google-10-100} indicating that they produce noteworthy content. The videos that Khan Academy hosts are all created by Salman Khan who holds an MBA from Harvard and three science degrees from MIT. Each is produced in a fairly consistent manner using a software whiteboard, a screen capture program, and a microphone while typically lasting about 10 minutes.
 
-As stated in \S \ref{sec:overview-goals} and \S \ref{sec:overview-features}, students using the Collaborative Environment should have access to supplemental learning resources and will have the ability to take quizzes given by their teachers and teaching assistants. The Khan Academy videos are ideal for this use as they are concise and short enough to be associated with individual quizzes that are created in the Collaborative Environment. If a student, while taking a quiz, feels that they are in need of some assistance, a link to the an appropriate Khan Academy video will be readily available to them.
+As stated in \S \ref{sec:overview-goals} and \S \ref{sec:overview-features}, students using the Collaborative Environment should have access to supplemental learning resources and will have the ability to take quizzes given by their coaches and teaching assistants. The Khan Academy videos are ideal for this use as they are concise and short enough to be associated with individual quizzes that are created in the Collaborative Environment. If a student, while taking a quiz, feels that they are in need of some assistance, a link to the an appropriate Khan Academy video will be readily available to them.
 
 \section{Features}
 \label{sec:design-features}
@@ -58,7 +59,7 @@ We now describe the main features of the Collaborative Environment as previously
 \label{subsec:design-year}
 In a traditional document-based teaching environment, student data is stored in numerous grade books  or spreadsheets which are held by many different people in many different places. Each teacher, for instance, would have their own set of student records and a district will have a permanent record for each student containing information such as their standardized test scores. If an administrator managed to collect all of this data into a single place, however frustrating that may be, the next thing they would have to do to it, before any type of analysis, would be to group it all by what year the record corresponds to.
 
-As the Collaborative Environment will be collecting data year after year, an Academic Year entity is required. Teachers, Teaching Assistants, and Students all have data associated with them that can change on an annual basis. Students will be taking different classes, have taken different standardized tests, and participated in different activities as well as be in a different grade altogether or have graduated. Each year can also bring with it a different round of quizzes and surveys and even new Teachers or Teaching Assistants.
+As the Collaborative Environment will be collecting data year after year, an Academic Year entity is required. Coaches, teaching assistants, and students all have data associated with them that can change on an annual basis. Students will be taking different classes, have taken different standardized tests, and participated in different activities as well as be in a different grade altogether or have graduated. Each year can also bring with it a different round of quizzes and surveys and even new coaches or teaching assistants.
 
 
 \subsubsection{Design}
@@ -75,7 +76,7 @@ The Year entity is really very simple, just a primary key identifier, \emph{id},
 
 We see in Figure \ref{fig:er-year}, that the year entity appropriately maintains a one-to-many relationship with each of the tables that reference it. In an EER diagram such as this, each box represents a table in a database and each row in a box corresponds to a column in that table. A connecting line indicates that a relationships exists between its connected tables. If we take the relationship between the year and survey tables as an example, the line, which is drawn using Crow's Foot notation, indicates that a survey can be given during one year and that a year can have many surveys given during it. This diagram additionally indicates that many quizzes (see \S \ref{subsec:design-quiz}) and many rosters (see \S \ref{subsec:design-district}) can also only be associated with only one year.
 
-The user's choice of which year they want to have as their current context for data viewing and manipulation will have to persist between each page of the Collaborative Environment. Having to constantly select what year to interact . Therefore, once a user initially visits the web site, a PHP session variable will be established that tracks the year they select which will then be used by subsequent SQL queries to retrieve the requested data.
+The user's choice of which year they want to have as their current context for data viewing and manipulation will have to persist between each page of the Collaborative Environment. Having to constantly select what year to interact with would be cumbersome, thus, once a user initially visits the web site, a PHP session variable will be established that tracks the year which will then be used by subsequent SQL queries to retrieve the requested data.
 
 \subsubsection{Implementation}
 As established in the previous section, the selected year must be persisted from page-to-page as well as be accessible in such a way that it will not require a user to constantly have to interact with a selector.
@@ -114,9 +115,9 @@ The Collaborative Environment internally refers to the set of user classes as ``
 	\label{fig:er-user}
 \end{figure}
 
-Each of these attributes has an obvious use except, perhaps, for \emph{salt} which is a precautionary security measure. All user passwords are hashed using using the SHA-256 cryptographic hash function. This means that if two users had the same password, then they would obviously result in identical hashes. This fact can be used exploited by people that have large masses of precomputed hashes. A salt, which is a randomly generated string, is append to the plaintext of a password before it is hashed. Now, even if the user's password is something common, what is hashed is, most likely, something unique.
+Each of these attributes has an obvious use except, perhaps, for \emph{salt} which is a precautionary security measure. All user passwords are hashed using using the SHA-256 cryptographic hash function. This means that if two users had the same password, then they would obviously result in identical hashes. This fact can be exploited by people that have large masses of precomputed hashes. A salt, which is a randomly generated string, is append to the plaintext of a password before it is hashed. Now, even if the user's password is something common, what is hashed is, most likely, something unique.
 
-For the sake of simplicity, we decided that the personal/education attributes \emph{birthday}, \emph{email}, \emph{ethnicity}, \emph{gender}, \emph{college}, \emph{major}, \emph{diploma}, and \emph{graduated} as year-independent data. This means that if and when these attributes have a value, that it will not vary based on what academic year the client has selected to be the current year; their values will persist through all years. On the other hand, there is strictly educational data that we do treat as year-dependent: activities, courses, exams, and grade level.
+For the sake of simplicity, the personal/education attributes \emph{birthday}, \emph{email}, \emph{ethnicity}, \emph{gender}, \emph{college}, \emph{major}, \emph{diploma}, and \emph{graduated} as year-independent data. This means that if and when these attributes have a value, that it will not vary based on what academic year the client has selected to be the current year; their values will persist through all years. On the other hand, there is strictly educational data that we do treat as year-dependent: activities, courses, exams, and grade level.
 
 \begin{figure}[h!]
 	\centering
@@ -130,9 +131,9 @@ For the sake of simplicity, we decided that the personal/education attributes \e
 Figure \ref{fig:er-user-student}, outlines the general model to achieve a year-dependent relationship between a student and their educational data and will be explained in depth in \S \ref{subsec:design-district}. Any given year is associated with many rosters, each of which contain a set of students in varying grade levels. Each student in a roster can then be associated with many exams, courses, and activities. 
 
 \subsubsection{Implementation}
-User management is broken up into three processes: creation, updating, and reading. As an interface to each of these processes, privileged users have access to a user management interface seen in Figure \ref{fig:screens-user-list}. This interface will only display the users that the currently authenticated user has access to. For administrators, this will be all users, whereas a teacher or a teaching assistant will only see the students that belong to the district that themselves belong to. For example, if a teacher is listed as being a teacher in the district ``Public School \#1'' for the year 2011, then the user list will only show students that also enrolled at the district during that year.
+User management is broken up into three processes: creation, updating, and reading. As an interface to each of these processes, privileged users have access to a user management interface seen in Figure \ref{fig:screens-user-list}. This interface will only display the users that the currently authenticated user has access to. For administrators, this will be all users, whereas a coach or a teaching assistant will only see the students that belong to the district that they themselves belong to. For example, if a coach is listed as such in the district ``Public School \#1'' for the year 2011, then the user list will only show students that also enrolled at the district during that year.
 
-This idea of teachers and teaching assistants only having access to the students that are on the same roster as them is persistent throughout the application. The details regarding districts, rosters, and permissions will be explained in \S \ref{subsec:design-district}.
+This idea of coaches and teaching assistants only having access to the students that are on the same roster as them is persistent throughout the application. The details regarding districts, rosters, and permissions will be explained in \S \ref{subsec:design-district}.
 
 With this data now being tracked by the Collaborative Environment, trends and reports will be able to be generated. Tracking student participation in activities, courses, and exams is now possible for the set of all students or even subsets such as minorities, males, or females.
 
@@ -145,7 +146,7 @@ With this data now being tracked by the Collaborative Environment, trends and re
 	\label{fig:screens-user-list}
 \end{figure}
 
-When a privileged user must add or edit a user, the interface appears as it does in Figure \ref{fig:screens-user-student-edit}, except all of the fields are simply blank in the case of adding a new user. The interface has has been split horizontally into two sections, the top is for personal/educational data whereas the bottom is for strictly educational data. In the top half, input fields has been grouped into sets of required and supplemental (optional). This allows the user to readily identify which fields they must have a value for and not have to wait for the program to return an error.
+When a privileged user must add or edit a user, the interface appears as it does in Figure \ref{fig:screens-user-student-edit}, except all of the fields are simply blank in the case of adding a new user. The interface has has been split horizontally into two sections, the top is for personal/educational data whereas the bottom is for strictly educational data. In the top half, input fields have been grouped into sets of required and supplemental (optional). This allows the user to readily identify which fields they must have a value for and not have to wait for the program to return an error.
 
 \begin{figure}[h!]
 	\centering
@@ -156,11 +157,11 @@ When a privileged user must add or edit a user, the interface appears as it does
 	\label{fig:screens-user-student-edit}
 \end{figure}
 
-The supplemental fields for \emph{ethnicity}, \emph{diploma}, and \emph{major}, provide the user with a limited selection of options rather than a freely fillable text input because this will allow for consistent data analysis. If users were able to enter whatever they wanted for these, it would become difficult to use that data to generate accurate reports. For example, if one person were to enter that a student was going to major in ``Mathematics'' and another were to enter ``Math''.
+The supplemental fields for \emph{ethnicity}, \emph{diploma}, and \emph{major}, provide the user with a limited selection of options rather than a freely enterable text input because this will allow for consistent data analysis. If users were able to enter whatever they wanted for these, it would become difficult to use that data to generate accurate reports. For example, if one person were to enter that a student was going to major in ``Mathematics'' and another were to enter ``Math'', then the system would have to either know what all synonyms of ``Mathematics'' are and group them or, more likely, ignore some data because it was not clearly related.
 
 Since the bottom half of the screen only applies to students, where strictly educational data is entered, it will only appear if the user is assigned the Student role. As stated in the Implementation section, \emph{activities}, \emph{courses}, and \emph{exams} are year-dependent. This means that if a user were to choose different academic years while editing a student's data, they would see these fields change appropriately. A student can be associated with as many year-dependent  fields as necessary by clicking the Add button for the appropriate section.
 
-Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fig:screens-user-student-profile}. This simply provides an view into the data stored for a user. Just as the add/edit screen would update its data when the current academic year is changed, so will the view screen.
+Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fig:screens-user-student-profile}. This simply provides a view into the data stored for a user. Just as the add/edit screen would update its data when the current academic year is changed, so will the view screen.
 
 \begin{figure}[h!]
 	\centering
@@ -175,12 +176,12 @@ Lastly, viewing user data in a more organized fashion is shown in Figure \ref{fi
 %%%% Districts
 \subsection{District Management}
 \label{subsec:design-district}
-In order to more accurately group the Collaborative Environment's users together and to control access to private student data, a district entity is necessary. If a district was to only ever have the same users associated with it, then a district entity alone would be sufficient, but this is not true; a district's relationship with its teachers, teaching assistants, and students is year-dependent. To allow for this, we introduce the idea of a roster entity where a district can have many rosters such that each roster is associated with a single year.
+In order to more accurately group the Collaborative Environment's users together and to control access to private student data, a district entity is necessary. If a district was to only ever have the same users associated with it, then a district entity alone would be sufficient, but this is not true; a district's relationship with its coaches, teaching assistants, and students is year-dependent. To allow for this, we introduce the idea of a roster entity where a district can have many rosters such that each roster is associated with a single year.
 
-Using this grouping, it is now also possible to allow access to data based upon which roster a user belongs to. For instance, teachers could be given access to only the students in the roster that they themselves are apart of for a given year, thus they would not be allowed to see student performance in another district. Having a district associated with a student for any given also allows for a wider range of data analysis as it becomes possible to, for instance, compare student performance between districts.
+Using this grouping, it is now also possible to allow access to data based upon which roster a user belongs to. For instance, coaches could be given access to only the students in the roster that they themselves are a part of for a given year, thus they would not be allowed to see student performance in another district. Having a district associated with a student for any given year also allows for a wider range of data analysis as it becomes possible to, for instance, compare student performance between districts.
 
 \subsubsection{Design}
-Using the concept of a roster, it becomes a join table (a table which links common attributes between two or more tables, in this case \emph{year\_id} and \emph{district\_id}) for the district's  many-to-many relationship with a year. In other words, a district will be associated with many years because it will have a different set of users each year. Likewise, a year will be associated with many districts because each academic year, the Collaborative Environment will be tracking multiple school districts.
+Using the concept of a roster, it becomes a join table (a table which links common attributes between two or more tables, in this case \emph{year\_id} and \emph{district\_id}) for the district's many-to-many relationship with a year. In other words, a district will be associated with many years because it will have a different set of users each year. Likewise, a year will be associated with many districts because each academic year, the Collaborative Environment will be tracking multiple school districts.
 
 \begin{figure}[h!]
 	\centering
@@ -191,10 +192,10 @@ Using the concept of a roster, it becomes a join table (a table which links comm
 	\label{fig:er-district}
 \end{figure}
 
-Figure \ref{fig:er-district} shows the many-to-many relationship between district and year via roster. In addition to being a join table, roster must be uniquely identifiable itself since it must be in a many-to-many relationship with the user table, therefore it has its own \emph{id}. To keep track of a district's three groups of users for a given year (teaches, teaching assistants, and students), its roster maintains three different relationships with the user table. If a user is a teacher and is to be in a district's roster for a given year, then they will be added to the roster\_teacher table. The same logic applies to assistants and students, except a student can additionally have a \emph{grade} associated with them (e.g. grade 9, grade 10).
+Figure \ref{fig:er-district} shows the many-to-many relationship between district and year via roster. A roster must be uniquely identifiable since it is in a many-to-many relationship with the user table, thus it has its own \emph{id}. To keep track of a district's three groups of users for a given year (coaches, teaching assistants, and students), its roster maintains three different relationships with the user table. If a user is a coach and is to be in a district's roster for a given year, then they will be added to the roster\_coaches table. The same logic applies to assistants and students, except a student can additionally have a \emph{grade} associated with them (e.g. grade 9, grade 10).
 
 \subsubsection{Implementation}
-Privileged users have access to the a list of the districts, as show in Figure \ref{fig:screens-district-list}, which they are in the rosters of for the currently selected year where they can a. An exception to this is for administrators, which have access to all districts. From this list, privileged users can edit any district in the list and administrators have the additional ability to create a new district.
+Privileged users have access to the list of districts, as show in Figure \ref{fig:screens-district-list}, which they are in the rosters of for the currently selected year where they can a. An exception to this is for administrators, which have access to all districts. From this list, privileged users can edit any district in the list and administrators have the additional ability to create a new district.
 
 \begin{figure}[h!]
 	\centering
@@ -205,7 +206,7 @@ Privileged users have access to the a list of the districts, as show in Figure \
 	\label{fig:screens-district-list}
 \end{figure}
 
-When editing or adding a district, the user will use the interface displayed in Figure \ref{fig:screens-district-edit}. One is able to add users of different classes to the roster by searching for their name in the appropriate search boxes. In this initial implementation, there is a constraint such that teachers and students can only be in one district's roster for a given year. This was set because, in most cases, teachers and students generally do not need to be associated with multiple districts. Due to this limitation, users that are already in a different roster for the current year will not appear in the search results for a user.
+When editing or adding a district, the user will use the interface displayed in Figure \ref{fig:screens-district-edit}. One is able to add users of different classes to the roster by searching for their name in the appropriate search boxes. In this initial implementation, there is a constraint such that coaches and students can only be in one district's roster for a given year. This was set because, in most cases, coaches and students generally do not need to be associated with multiple districts. Due to this limitation, users that are already in a different roster for the current year will not appear in the search results for a user. If a student, for example, switches school districts, they must first be removed from their current district and then they will appear in the search results when being added to their new district.
 
 \begin{figure}[h!]
 	\centering
@@ -216,12 +217,12 @@ When editing or adding a district, the user will use the interface displayed in 
 	\label{fig:screens-district-edit}
 \end{figure}
 
-Each new academic year, a roster will need to be created that ties the districts to that new year. This can be a tiresome activity, especially if a district has a lot of users that need to be associated with it. To try to ease this process, there is an import feature which will simply look at the previous year's roster for the current district and copy it to the current year's roster. It will also automatically increment the student's grades by one; this is due to the assumption that a majority of students will advance to the next grade.
+Each new academic year, a roster will need to be created that ties the districts to that new year. This can be a tiresome activity, especially if a district has a lot of users that need to be associated with it. To try to ease this process, there is an import feature which will simply look at the previous year's roster for the current district and copy it to the current year's roster. It will also automatically increment the student's grades by one; this is due to the assumption that a majority of students will advance to the next grade. Those that do not advance can be manually edited.
 
 %%%% Learning Pathway
 \subsection{Learning Pathway}
 \label{subsec:design-pathway}
-While exploring the use of the Khan Academy video and exercise educational resources, we took note of a tool which they call a Knowledge Map (see Figure \ref{fig:screens-pathway-khan-map}). They advertise this map as an organization of all the site's exercises that is capable of suggesting the best exercises for the student to work on and can remind them when they seem to need a review \cite{khanacademy-about}. Due to the open source licensing of the Khan Academy, we adopted this idea to better suit the needs of IMPETUS.
+While exploring the use of the Khan Academy video and exercise educational resources, we took note of a tool which they call a Knowledge Map (see Figure \ref{fig:screens-pathway-khan-map}). They advertise this map as an organization of all the site's exercises that is capable of suggesting the best exercises for the student to work on and can remind them when they seem to need a review \cite{khan-website-about}. Due to the open source licensing of the Khan Academy, we adopted this idea to better suit the needs of IMPETUS.
 
 \begin{figure}[h!]
 	\centering
@@ -232,7 +233,7 @@ While exploring the use of the Khan Academy video and exercise educational resou
 	\label{fig:screens-pathway-khan-map}
 \end{figure}
 
-In the Khan Academy Knowledge Map, clicking on a node takes the student directly to the exercise that is associated with it. For the Collaborative Environment, we wanted one layer of abstraction to sit between the clicking on a node and going to an assessment. This abstraction (i.e. a ``node details'' screen) would be able to provide a link to the state standard justifying its existence in the map, links to quizzes built using the Collaborative Environment, and links to educational resources (such as videos at the Khan Academy) that will aid the student in achieving mastering in the quizzes.
+In the Khan Academy Knowledge Map, clicking on a node takes the student directly to the exercise that is associated with it. For the Collaborative Environment, we wanted one layer of abstraction to sit between the clicking on a node and going to an assessment. This abstraction (i.e. a ``node details'' screen) would be able to provide a link to the state standard justifying its existence in the map, links to quizzes built using the Collaborative Environment, and links to educational resources (such as videos at the Khan Academy) that will aid the student in achieving mastery in the quizzes.
 
 \subsubsection{Design}
 The learning pathway is a tree structure containing nodes and edges. This can be translated into a database by having a node table with a many-to-many relationship with itself (see Figure \ref{fig:er-pathway}). The join table for this relationship holds any given node's parent node(s). To keep track of where a node should appear, it has a horizontal and vertical position (\emph{h\_pos} and \emph{v\_pos}). Lastly a node needs a link to its details which are, as described above, links to educational resources and quizzes.
@@ -262,7 +263,7 @@ In Figure \ref{fig:screens-pathway-graph}, we see the final output of one studen
 Clicking on a node will take the student to a details page that contain links to:
 \begin{inparaenum}[\itshape 1\upshape)]
 	\item the state standard providing justification for learning this topic;
-	\item quizzes that teachers or teaching assistants make for this topoc; and
+	\item quizzes that coaches or teaching assistants make for this topic; and
 	\item educational resources to aid in learning the material, such as links to videos at the Khan Academy.
 \end{inparaenum}
 
@@ -275,14 +276,14 @@ Clicking on a node will take the student to a details page that contain links to
 	\label{fig:screens-pathway-node}
 \end{figure}
 
-In Figure \ref{fig:screens-pathway-node} each of these link varieties can be seen. The quiz section also lists and links to the last attempt the student made at this. Since it is not a perfect score, that is why the node for ``Linear Equations 2'' was marked as incomplete. Details of creating this quiz and making that attempt can be found in \S \ref{subsec:design-quiz}.
+In Figure \ref{fig:screens-pathway-node} each of these link varieties can be seen. The quiz section also lists and links to the last attempt the student made at this. Since it is not a perfect score, the node for ``Linear Equations 2'' is marked as incomplete. Details of creating this quiz and making that attempt can be found in \S \ref{subsec:design-quiz}.
 
 A current limitation of this system is that adding new nodes and rearranging existing ones in the tree is a tedious and manual process.
 
 %%%% Quiz
 \subsection{Quiz System}
 \label{subsec:design-quiz}
-A system by which teachers and teaching assistants can create assessments of their student's knowledge is one of the key collaborative goals of this system. By allowing teachers and teaching assistants to create quizzes quickly and easily, it will allow them to get valuable feedback from their students. From the student's perspective, they'll have access to a means of studying and brushing up on topics that they might feel they are struggling with. A quiz can be made about any topic, but when used in conjunction with the learning pathway, as described in \S \ref{subsec:design-pathway}, it creates a rich means of showing students the topics they need to know (based on state standards) while providing them with the resources to succeed.
+A system by which coaches and teaching assistants can create assessments of their student's knowledge is one of the key collaborative goals of this system. By allowing coaches and teaching assistants to create quizzes quickly and easily, it will allow them to get valuable feedback from their students. From the student's perspective, they'll have access to a means of studying and brushing up on topics that they might feel they are struggling with. A quiz can be made about any topic, but when used in conjunction with the learning pathway, as described in \S \ref{subsec:design-pathway}, it creates a rich means of showing students the topics they need to know (based on state standards) while providing them with the resources to succeed.
 
 \subsubsection{Design}
 A quiz in the Collaborative Environment can be broken up into two sets of relationships:
@@ -304,7 +305,7 @@ Figure \ref{fig:er-quiz} shows that one quiz may have multiple questions and tha
 To allow students the ability to learn from their mistakes, quizzes may have multiple attempts made at them to achieve a perfect score. This requires that a user have a many-to-many relationship with a quiz itself via an attempts join table. To be able to store exactly which questions a student got correct or incorrect along with their actual answer, every quiz attempt has a many-to-many relationship with a quiz's questions called result. The idea is that an individual attempt at a quiz is comprised of a series of results, or a result of answering each quiz question. Each result is able to store the exact answer that a student gave along with if it was correct.
 
 \subsubsection{Implementation}
-When a privileged user wants to create a quiz, they will be presented with the interface seen in Figure \ref{fig:screens-quiz-new}. First, the creator must choose a name for the quiz and may enter instructions for the student to follow. Next, the creator may add as many problems to the quiz as they must, each of which they may add one or more answers to.
+When a privileged user wants to create a quiz, they will be presented with the interface seen in Figure \ref{fig:screens-quiz-new}. First, the creator must choose a name for the quiz and may enter instructions for the student to follow. Next, the creator may add as many problems to the quiz as they want, each of which they may add one or more answers to.
 
 \begin{figure}[p!]
 	\centering
@@ -315,11 +316,11 @@ When a privileged user wants to create a quiz, they will be presented with the i
 	\label{fig:screens-quiz-new}
 \end{figure}
 
-When adding the text for the question, the creator may opt to use the \LaTeX\ displayed math shorthand (i.e. \texttt{\textbackslash [ ...\textbackslash ]} ). Should they choose to, then their question will be rendered by a JavaScript library called MathJax that displays equations in \LaTeX\ markup in all web browsers. \cite{mathjax-webpage}. If they choose not to, then whatever is entered will simply appear as the question. An example of each can be seen in the questions in Figure \ref{fig:screens-quiz-new}.
+When adding the text for the question, the creator may opt to use the \LaTeX\ displayed math shorthand (i.e. \texttt{\textbackslash [ ...\textbackslash ]} ). Should they choose to, then their question will be rendered by a JavaScript library called MathJax\footnote{MathJax: \url{http://www.mathjax.org/}} that displays equations in \LaTeX\ markup in all web browsers. If they choose not to, then whatever is entered will simply appear as the question. An example of each can be seen in the questions in Figure \ref{fig:screens-quiz-new}.
 
-As stated in the design section, a question can have one or more answers associated with it. If it has only one answer, it makes it a short answer question allowing the student and freely type in an answer. The creator must include a ``text label'' for the answer which is what will appear before the text input when attempting the quiz (e.x. ``$x = $''). If the question has multiple answers (making it a multiple choice question), then this same text label becomes the visible text identifying one answer from another.
+As stated in the design section, a question can have one or more answers associated with it. If it has only one answer, it makes it a short answer question allowing the student to freely type in an answer. The creator must include a ``text label'' for the answer which is what will appear before the text input when attempting the quiz (e.x. ``$x = $''). If the question has multiple answers (making it a multiple choice question), then this same text label becomes the visible text identifying one answer from another.
 
-Switching to the perspective of a logged in student, they would see the interface show in Figure \ref{fig:screens-quiz-list-student} which displays the available quizzes, some of which the student has attempted and one of which that they have not.
+Switching to the perspective of a logged in student, they would see the interface shown in Figure \ref{fig:screens-quiz-list-student} which displays the available quizzes, some of which the student has attempted and one of which that they have not.
 
 \begin{figure}[h!]
 	\centering
@@ -330,7 +331,7 @@ Switching to the perspective of a logged in student, they would see the interfac
 	\label{fig:screens-quiz-list-student}
 \end{figure}
 
-If the student were to attempt the ``Linear Equations 2'' quiz, they would then they would be presented with what is shown in Figure \ref{fig:screens-quiz-new-attempt}; a rendered version of what was being constructed in Figure \ref{fig:screens-quiz-new}. One can see that ``Problem 1'' has a styling that looks identical to what one would expect to see in \LaTeX\ rendered document as well as a plaintext question in ``Problem 2''. ``Problem 1'' is a demonstration of a short answer question and allows the user to freely type in an answer whereas ``Problem 2'' is clearly a multiple choice question.
+If the student were to attempt the ``Linear Equations 2'' quiz, they would then be presented with what is shown in Figure \ref{fig:screens-quiz-new-attempt}; a rendered version of what was being constructed in Figure \ref{fig:screens-quiz-new}. One can see that ``Problem 1'' has a styling that looks identical to what one would expect to see in a \LaTeX\ rendered document as well as a plaintext question in ``Problem 2''. ``Problem 1'' is a demonstration of a short answer question and allows the user to freely type in an answer, whereas ``Problem 2'' is clearly a multiple choice question.
 
 \begin{figure}[h!]
 	\centering
@@ -363,14 +364,14 @@ As previously stated, students have the option of taking a quiz as many times as
 	\label{fig:screens-quiz-attempt-list}
 \end{figure}
 
-Once students start answering quizzes, teachers and teaching assistants are able to see their progress on them from the results interface show in Figure \ref{fig:screens-quiz-results-list}. The viewing policy on quiz results is that teachers and teaching assistants may only see the students that are in the same district roster as them for the currently selected year (see \S \ref{subsec:design-district} for details of the district and roster design).
+Once students start answering quizzes, coaches and teaching assistants are able to see their progress on them from the results interface show in Figure \ref{fig:screens-quiz-results-list}. The viewing policy on quiz results is that coaches and teaching assistants may only see the students that are in the same district roster as them for the currently selected year (see \S \ref{subsec:design-district} for details of the district and roster design).
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/quiz/quiz-results-list}
 	}
-	\caption{A teacher views the quiz results of the students in their district.}
+	\caption{A coach views the quiz results of the students in their district.}
 	\label{fig:screens-quiz-results-list}
 \end{figure}
 
@@ -395,9 +396,9 @@ A survey is designed in a nearly identical fashion to that of a quiz. The only d
 	\label{fig:er-survey}
 \end{figure}
 
-Figure \ref{fig:er-survey} shows that one survey may have multiple questions and that a question may have multiple answers. A survey question may be one of three types: multiple choice, short answer, and a likert scale. A likert scale question is a shorthand for making a multiple choice question with these answers: ``disagree strongly'', ``disagree'', ``disagree somewhat'', ``no opinion'', ``agree'', ``agree somewhat'', and ``agree strongly''.
+Figure \ref{fig:er-survey} shows that one survey may have multiple questions and that a question may have multiple answers. A survey question may be one of three types: multiple choice, short answer, and a scale. A scale question is a shorthand for making a multiple choice question with these answers: ``disagree strongly'', ``disagree'', ``disagree somewhat'', ``no opinion'', ``agree'', ``agree somewhat'', and ``agree strongly''.
 
-Storing what each user's answers for a particular question in a survey requires that there exist a many-to-many relationship between a survey submission and a survey question called result. Each result is able to store the answer a user provided.
+Storing what each user answers for a particular question in a survey requires that there exist a many-to-many relationship between a survey submission and a survey question called result. Each result is able to store the answer a user provided.
 
 \subsubsection{Implementation}
 Privileged users are permitted to create surveys and do so using the interface seen in Figure \ref{fig:screens-survey-new}. The creator must supply a name for the survey and, optionally, instructions for the survey participants to follow. Following this, they may add as many of the three possible question types (multiple choice, short answer, and scale) as are necessary.
@@ -416,13 +417,13 @@ Privileged users are permitted to create surveys and do so using the interface s
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-new}
 	}
-	\caption{A teacher creates a new survey.}
+	\caption{A coach creates a new survey.}
 	\label{fig:screens-survey-new}
 \end{figure}
 
-The first question in Figure \ref{fig:screens-survey-new} is a multiple choice question. Once the text is added, the creator may add as many possible answers as necessary to the question. The next question in a short answer, allowing a participant to freely type in an answer. Lastly, a there is a scale question. The agreement scale will automatically be output when someone views the survey.
+The first question in Figure \ref{fig:screens-survey-new} is a multiple choice question. Once the text is added, the creator may add as many possible answers as necessary to the question. The next question in a short answer, allowing a participant to freely type in an answer. Lastly, there is a scale question. The agreement scale will automatically be rendered when someone views the survey.
 
-As a student that is interested in participating in a survey, they would first encounter a list of  surveys organized by their completion state. A survey can only be completed once so the list of italicized entries is just to act as proof of submission. In Figure \ref{fig:screens-survey-list}, the survey being created in Figure \ref{fig:screens-survey-new}, ``College Survey'', is now available to completed.
+As a student that is interested in participating in a survey, they would first encounter a list of  surveys organized by their completion state. A survey can only be completed once so the list of italicized entries is just to act as proof of submission. In Figure \ref{fig:screens-survey-list}, the survey being created in Figure \ref{fig:screens-survey-new}, ``College Survey'', is now available to be completed.
 
 \begin{figure}[h!]
 	\centering
@@ -433,14 +434,14 @@ As a student that is interested in participating in a survey, they would first e
 	\label{fig:screens-survey-show}
 \end{figure}
 
-Upon choosing to participate in the ``College Survey'', the student will complete it using the interface show in Figure \ref{fig:screens-survey-show}. Once a submission occurs, a student will not be allowed to see either the results or what they submitted. This is reserved for privileged users.
+Upon choosing to participate in the ``College Survey'', the student will complete it using the interface shown in Figure \ref{fig:screens-survey-show}. Once a submission occurs, a student will not be allowed to see either the results or what they submitted. This is reserved for privileged users.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/survey/survey-results}
 	}
-	\caption{A teacher views the results of a survey.}
+	\caption{A coach views the results of a survey.}
 	\label{fig:screens-survey-results}
 \end{figure}
 
@@ -449,9 +450,9 @@ At any time after a survey has been released, its live results can be viewed by 
 %%%% Messaging
 \subsection{Messaging}
 \label{subsec:design-messaging}
-To facilitate communication between all of these users, a messaging system was devised that would allow for a quick means of contacting either a user or a group of users. A problem that IMPETUS has continuously faced is that of organizing the contact information of all its associated people. There was no quick way to contact students and contacting teachers involved sorting through contact lists.
+To facilitate communication between all of these users, a messaging system was devised that would allow for a quick means of contacting either a user or a group of users. A problem that IMPETUS has continuously faced is that of organizing the contact information of all its associated people. There was no quick way to contact students and contacting coaches involved sorting through contact lists.
 
-As a solution to this, the Collaborative Environment has a simple messaging system that allows for contacting any of the systems registered users. One may send a message to just an individual, a group of individuals, or even an entire class of users quickly. The system keeps track of messages internally, but is capable of notifying a user of a new message via email if they have an email address associated with their account.
+As a solution to this, the Collaborative Environment has a simple messaging system that allows for contacting any of the system's registered users. One may send a message to just an individual, a group of individuals, or even an entire class of users quickly. The system keeps track of messages internally, but is capable of notifying a user of a new message via email if they have an email address associated with their account.
 
 \subsubsection{Design}
 The messaging system treats messages and their replies as a correspondence thread, that is, one message is a parent and then replies may be added after that parent. When a new message is created, a single instance of that message is stored in the message table (see Figure \ref{fig:er-message}). All of the designated recipients are then added to the recipient table, including the sender themselves. This means that even though a message will be sent to at least two people, there is only ever one instance of the message itself and all recipients are basically given viewing rights to that message via the recipients table. When a user has opened a message or deletes it, their entry in the recipients table for that message is simply modified.
@@ -470,36 +471,36 @@ Having a message system built like this allows for an archive of messages and re
 \end{figure}
 
 \subsubsection{Implementation}
-As stated previously, any registered user in the system has access to the messaging feature and, as such, can message any other user in the system. In Figure \ref{fig:screens-message-new}, a student is sending their teacher a message regarding a homework assignment. The ``To'' field allows for any number of recipients to be added to it via an autocompleting search feature. Recipients can also be classes of users such as ``Students'' as a quick way of addressing all the users in the system that have the student role. Upon sending the message, it will appear in both the sender's and the recipient's message lists (but in the case of the sender, it will be marked as read). Additionally, if the recipients have an email address associated with their account, a copy of the message will be sent to that address along with a link to view the message in the Collaborate Environment. The message list acts as a combination of an inbox and an outbox.
+As stated previously, any registered user in the system has access to the messaging feature and, as such, can message any other user in the system. In Figure \ref{fig:screens-message-new}, a student is sending their coach a message regarding a homework assignment. The ``To'' field allows for any number of recipients to be added to it via an autocompleting search feature. Recipients can also be classes of users such as ``Students'' as a quick way of addressing all the users in the system that have the student role. Upon sending the message, it will appear in both the sender's and the recipient's message lists (but in the case of the sender, it will be marked as read). Additionally, if the recipients have an email address associated with their account, a copy of the message will be sent to that address along with a link to view the message in the Collaborate Environment. The message list acts as a combination of an inbox and an outbox.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-new}
 	}
-	\caption{A student sends a new message to their teacher.}
+	\caption{A student sends a new message to their coach.}
 	\label{fig:screens-message-new}
 \end{figure}
 
-When the teacher that was marked as the recipient of the student's message checks their message list (Figure \ref{fig:screens-message-list}), they will see it at the top and highlighted as it is an unread message.
+When the coach that was marked as the recipient of the student's message checks their message list (Figure \ref{fig:screens-message-list}), they will see it at the top and highlighted as it is an unread message.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-list}
 	}
-	\caption{A teacher views their message list.}
+	\caption{A coach views their message list.}
 	\label{fig:screens-message-list}
 \end{figure}
 
-Viewing a message will open the chain of messages with the parent at the top. In this case, since the student was the original sender, their message will appear at the top of the list and replies will be appended. The teacher responds the student's inquiry, as shown in Figure \ref{fig:screens-message-reply}, and an email will be sent to the student, if appropriate, notifying them of the response. If the teacher were to return to their message list, the thread of messages will now be marked as unread.
+Viewing a message will open the chain of messages with the parent at the top. In this case, since the student was the original sender, their message will appear at the top of the list and replies will be appended. The coach responds to the student's inquiry, as shown in Figure \ref{fig:screens-message-reply}, and an email will be sent to the student, if appropriate, notifying them of the response. If the coach were to return to their message list, the thread of messages will now be marked as unread.
 
 \begin{figure}[h!]
 	\centering
 	\fbox{
 		\includegraphics[width=0.8\textwidth]{figures/screens/message/message-reply}
 	}
-	\caption{A teacher replies to a student's message.}
+	\caption{A coach replies to a student's message.}
 	\label{fig:screens-message-reply}
 \end{figure}
 
@@ -508,14 +509,14 @@ Viewing a message will open the chain of messages with the parent at the top. In
 \label{subsec:design-analytics}
 As stated in \S \ref{sec:motivation}, a motivation behind creating the Collaborative Environment is to collect data about the individuals using it, in particular, the students. The methods that have been described for storing and organizing student personal data (\S \ref{subsec:design-user}), educational data (\S \ref{subsec:design-user} and \S \ref{subsec:design-district}), and quiz results (\S \ref{subsec:design-quiz}) also need retrieval methods that will combine said data into more meaningful representations.
 
-An organization funded by STEP must submit, each a year, a report to the Education Department that summarizes data about the participants, activities, program content, and outcomes. This summary data is required in a tabular form as specified by a master report form which the Education Department provides \cite{reportryan-doc}, examples of which are a participant roster, participating school roster, student assessment scores, SAT scores, and student graduate placement.
+A STEP funded institution must submit, each year, a report to the Education Department that summarizes data about the participants, activities, program content, and outcomes. This summary data is required in a tabular form as specified by a master report form which the Education Department provides \cite{step-final-report}, examples of which are a participant roster, participating school roster, student assessment scores, SAT scores, and student graduate placement.
 
 The Collaborative Environment uses the data it collects to output a web based version of the state-requested information in a format that matches what is expected by the annual report. Additionally, it will output the same data as a comma-separated value (CSV) file for manipulation and more advanced processing via a spreadsheet program.
 
 \subsubsection{Design}
-Gathering the data to output is a straightforward process when using the tables described in the previous sections, it is just a matter of constructing database queries to get the result you want. Once a result set of a data has been generated, outputting it depends on how it was requested.
+Gathering the data to output is a straightforward process when using the tables described in the previous sections, as it is just a matter of constructing database queries to get the result you want. Once a result set of a data has been generated, outputting it depends on how it was requested.
 
-A result set can be returned to the requesting user as either an HTML table on a webpage or as a CSV file to be downloaded. Both of these formats are basically tables, just one has all of its data wrapped by HTML tags and the other by commas. This is an ideal scenario for the use of abstraction which Figure \ref{fig:uml-analytics} outlines.
+A result set can be returned to the requesting user as either an HTML table on a webpage or as a CSV file to be downloaded. Both of these formats are basically tables, except that one has its data wrapped by HTML tags and the other by commas. This is an ideal scenario for the use of abstraction which Figure \ref{fig:uml-analytics} outlines.
 
 \begin{figure}[h!]
 	\centering
@@ -526,9 +527,9 @@ A result set can be returned to the requesting user as either an HTML table on a
 	\label{fig:uml-analytics}
 \end{figure}
 
-Since all analytical queries will have a result set of data that is tabular in nature, we can abstract that notion into \texttt{AbstractResult}. It basically represents that idea that results will have to be outputted based on one of two formats, either HTML or CSV, but how exactly that is done is left up to a specific implementation (e.g. a table of participants in STEP will look and be implemented differently than from a table of how many males in each grade of each ethnicity participated in STEP for a given year).
+Since all analytical queries will have a result set of data that is tabular in nature, we can abstract that notion into \texttt{AbstractResult}. It represents the idea that results will have to be outputted based on one of two formats, either HTML or CSV, but how exactly that is done is left up to a specific implementation (e.g. a table of participants in STEP will look and be implemented differently than a table of how many males in each grade of each ethnicity participated in STEP for a given year).
 
-The \texttt{SimpleResult} implementation is for outputting a result set where each row's cells are independent of each other (i.e. the value of one will not influence the value of another). An example of this would be outputting a list of user: the result set is just every row of the user table. One the other hand the \texttt{ComplexResult} implementation is used for outputting a result set where some columns are dependent on others. For example, the Collaborative Environment keeps track of an arbitrary set of activities that student participation in will be tracked. If one were to query for how many participants are enrolled in each activity, that number is, obviously, dependent on the activity and, as such, two queries must occur: first for all activities, then for each activity, query for how many students participate in it.
+The \texttt{SimpleResult} implementation is for outputting a result set where each row's cells are independent of each other (i.e. the value of one will not influence the value of another). An example of this would be outputting a list of users: the result set is every row of the user table. One the other hand the \texttt{ComplexResult} implementation is used for outputting a result set where some columns are dependent on others. For example, the Collaborative Environment keeps track of an arbitrary set of activities, each of which monitor the number of student participants. If one were to query how many participants are enrolled in each activity, that number is, obviously, dependent on the activity and, as such, two queries must occur: first for all activities, then for each activity, query for how many students participate in it.
 
 Sometimes a result set must be generated that does not fit the simple or complex implementations, in which case a more specialized implementation is needed, as is the case with \texttt{StudentsServedResult}. In this case, it can handle outputting two result sets at once.
 
@@ -546,4 +547,4 @@ The current implementation of the Collaborative Environment only allows administ
 	\label{fig:screens-analytics-list}
 \end{figure}
 
-\section{Summary}
+%\section{Summary}

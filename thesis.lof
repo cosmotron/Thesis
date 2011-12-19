@@ -1,42 +1,42 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Year Enhanced Entity-Relationship (EER) Diagram}}{19}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Year Selector Highlight}}{20}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces User and Role EER Diagram}}{22}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Student user EER Diagram}}{23}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces A privileged user's view of all the system's users.}}{24}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces A privileged user editing a student's account.}}{25}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces A privileged user's view of a student's profile.}}{26}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces District and Roster EER}}{27}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces An administrator's view of all the system's districts.}}{28}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces A privileged user editing a district.}}{29}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Khan Academy Knowledge Map}}{30}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Learning Pathway EER}}{31}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces A student views their current learning pathway.}}{32}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces A student views their progress in the ``Linear Equations 2'' pathway node.}}{33}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Quiz and Quiz Result EER}}{34}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces A privileged user creating a quiz.}}{36}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces A student's list of available quizzes.}}{37}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces A student attempts a new quiz.}}{38}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces A student receives the results of their quiz attempt.}}{38}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces A student views all of their attempts at a quiz.}}{39}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces A teacher views the quiz results of the students in their district.}}{40}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Survey and Survey Submission EER}}{41}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces A student views a list of incomplete and completed surveys.}}{42}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces A teacher creates a new survey.}}{43}
-\contentsline {figure}{\numberline {3.25}{\ignorespaces A student attempts a new survey.}}{44}
-\contentsline {figure}{\numberline {3.26}{\ignorespaces A teacher views the results of a survey.}}{45}
-\contentsline {figure}{\numberline {3.27}{\ignorespaces Message and Message Recipient EER}}{46}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces A student sends a new message to their teacher.}}{47}
-\contentsline {figure}{\numberline {3.29}{\ignorespaces A teacher views their message list.}}{48}
-\contentsline {figure}{\numberline {3.30}{\ignorespaces A teacher replies to a student's message.}}{48}
-\contentsline {figure}{\numberline {3.31}{\ignorespaces Analytics UML Object Diagram}}{49}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces The currently implemented analytical tools available to an administrator.}}{51}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Year Enhanced Entity-Relationship (EER) Diagram}}{20}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Year Selector Highlight}}{21}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces User and Role EER Diagram}}{23}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Student user EER Diagram}}{24}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces A privileged user's view of all the system's users.}}{25}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces A privileged user editing a student's account.}}{26}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces A privileged user's view of a student's profile.}}{27}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces District and Roster EER}}{28}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces An administrator's view of all the system's districts.}}{29}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces A privileged user editing a district.}}{30}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Khan Academy Knowledge Map}}{31}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Learning Pathway EER}}{32}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces A student views their current learning pathway.}}{33}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces A student views their progress in the ``Linear Equations 2'' pathway node.}}{34}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Quiz and Quiz Result EER}}{36}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces A privileged user creating a quiz.}}{37}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces A student's list of available quizzes.}}{38}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces A student attempts a new quiz.}}{39}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces A student receives the results of their quiz attempt.}}{40}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces A student views all of their attempts at a quiz.}}{40}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces A coach views the quiz results of the students in their district.}}{41}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Survey and Survey Submission EER}}{42}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces A student views a list of incomplete and completed surveys.}}{43}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces A coach creates a new survey.}}{44}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces A student attempts a new survey.}}{45}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces A coach views the results of a survey.}}{46}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Message and Message Recipient EER}}{47}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces A student sends a new message to their coach.}}{48}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces A coach views their message list.}}{49}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces A coach replies to a student's message.}}{49}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces Analytics UML Object Diagram}}{51}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces The currently implemented analytical tools available to an administrator.}}{52}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Sample listing of all STEP student participants.}}{65}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Sample listing of the number of students of each ethnicity in grades 7-12 grouped by gender.}}{66}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Sample listing of the number of students participating in each activity.}}{67}
-\contentsline {figure}{\numberline {A.4}{\ignorespaces Sample listing of each graduating student and details of the college they will attend.}}{67}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Sample listing of all STEP student participants.}}{67}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Sample listing of the number of students of each ethnicity in grades 7-12 grouped by gender.}}{68}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Sample listing of the number of students participating in each activity.}}{69}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces Sample listing of each graduating student and details of the college they will attend.}}{69}
